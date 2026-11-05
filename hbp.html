@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hakot Basura Pledges · San Antonio South HOA</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{--bg:#f5f7f4;--card:#fff;--tx:#17211b;--mut:#5b6a60;--bd:#d9e1da;--ac:#1f7a4d;--acx:#fff;--p1:#2f7bd6;--p2:#d9822b;--map:#eef3ef;--err:#b3261e;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101613;--card:#18201b;--tx:#e8efe9;--mut:#9fb0a5;--bd:#2c382f;--ac:#4cc58a;--acx:#06210f;--p1:#6aa8f5;--p2:#f0a560;--map:#121a15;--err:#ff8a80;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101613;--card:#18201b;--tx:#e8efe9;--mut:#9fb0a5;--bd:#2c382f;--ac:#4cc58a;--acx:#06210f;--p1:#6aa8f5;--p2:#f0a560;--map:#121a15;--err:#ff8a80;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px max(16px,3vw,calc((100% - 1200px)/2 + max(16px,3vw)));border-bottom:1px solid var(--bd);background:var(--card);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+h1{font-size:1.15rem;margin:0}header small{color:var(--mut);display:block;font-size:.8rem}
+main{max-width:1200px;margin:0 auto;padding:16px max(16px,3vw) 40px;display:grid;gap:16px;grid-template-columns:minmax(300px,420px) 1fr}
+@media(max-width:860px){main{grid-template-columns:1fr}.mapcard{order:-1}}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}
+h2{font-size:1.05rem;margin:0 0 12px}
+label,.lb{display:block;font-weight:600;font-size:.9rem;margin:12px 0 4px}
+input[type=text],input[type=number],input[type=date],select,textarea{width:100%;padding:11px 12px;font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:10px}
+input:focus-visible,button:focus-visible,.opt:focus-within{outline:3px solid var(--ac);outline-offset:1px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.opt{border:1.5px solid var(--bd);border-radius:10px;padding:10px;cursor:pointer;display:flex;gap:8px;align-items:center;min-height:44px}
+.opt:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,transparent)}
+.opt input{accent-color:var(--ac)}
+.sw{width:12px;height:12px;border-radius:50%;display:inline-block}
+button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:10px 14px;min-height:44px}
+button.pri{background:var(--ac);color:var(--acx);border-color:var(--ac);font-weight:700;width:100%;margin-top:16px}
+.hint{color:var(--mut);font-size:.82rem;margin:4px 0 0}.err{color:var(--err);font-size:.85rem;min-height:1.2em;margin:6px 0 0}
+#rcpt{display:none}#rcpt.on{display:block}#prev{max-width:100%;max-height:140px;border-radius:8px;margin-top:8px;display:none}
+.mapcard{align-self:start;position:relative}
+@media(max-width:860px){.mapcard{position:static}}
+#mapwrap{position:relative;border:1px solid var(--bd);border-radius:12px;background:var(--map);overflow:hidden;touch-action:none}
+svg#map{width:100%;height:auto;aspect-ratio:1700/700;display:block;cursor:grab}
+.ph{fill-opacity:.28;stroke-width:3;cursor:pointer;transition:fill-opacity .15s}.ph:hover{fill-opacity:.5}
+.ph.sel{fill-opacity:.5}
+#p1{fill:var(--p1);stroke:var(--p1)}#p2{fill:var(--p2);stroke:var(--p2)}
+.lbl{font:700 40px system-ui;fill:var(--tx);pointer-events:none;paint-order:stroke;stroke:var(--map);stroke-width:6}
+.dot{stroke:var(--card);stroke-width:3}.me{animation:pl 1.2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pl{to{transform:scale(2.6);opacity:0}}
+.zc{position:absolute;right:8px;top:8px;display:grid;gap:6px}.zc button{padding:0;width:40px;height:40px;font-size:1.2rem}
+.leg{display:flex;flex-wrap:wrap;gap:14px;font-size:.85rem;color:var(--mut);margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px}
+.stat{background:var(--bg);border-radius:10px;padding:10px}.stat b{display:block;font-size:1.25rem}.stat span{color:var(--mut);font-size:.8rem}
+.tw{overflow-x:auto;grid-column:1/-1}table{border-collapse:collapse;width:100%;min-width:920px;font-size:.9rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd)}th{color:var(--mut);font-size:.78rem;text-transform:uppercase}
+.row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.tg{padding:2px 8px;border-radius:99px;font-size:.78rem;border:1px solid var(--bd)}
+.na{display:inline-flex;align-items:center;gap:8px;margin:8px 0 0;font-weight:500;cursor:pointer;min-height:32px}.na input{accent-color:var(--ac);width:18px;height:18px}
+dialog{border:1px solid var(--bd);border-radius:14px;background:var(--card);color:var(--tx);padding:18px;width:min(520px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto}dialog::backdrop{background:rgba(0,0,0,.55)}.ab{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.hb{display:flex;gap:8px;flex-wrap:wrap}
+#tspot{position:fixed;z-index:20;border-radius:12px;box-shadow:0 0 0 9999px rgba(0,0,0,.58),0 0 0 3px var(--ac);pointer-events:none;transition:left .25s,top .25s,width .25s,height .25s}
+#tcard{position:fixed;z-index:21;width:min(360px,calc(100vw - 24px));background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:14px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+#tcard h3{margin:2px 0 6px;font-size:1.05rem}#tcard p{margin:0 0 8px;font-size:.92rem}.tact{color:var(--ac);font-weight:700}.tc{color:var(--mut);font-size:.78rem}
+.tn{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px}.tl{background:none;border:0;color:var(--mut);text-decoration:underline;padding:6px;min-height:36px;font-size:.82rem}.tnx{background:var(--ac);color:var(--acx);border-color:var(--ac);font-weight:700}#tcard button:disabled{opacity:.45;cursor:default}
+@media(max-width:600px){#tcard{left:12px!important;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));top:auto!important;width:auto}}
+.hd{margin-bottom:12px}.hd h2{margin:0}.acts{display:flex;gap:8px;flex-wrap:wrap}@media(max-width:700px){.acts{width:100%}.acts button{flex:1}}
+@media(max-width:700px){table{min-width:0}thead{display:none}table,tbody,tr,td{display:block;width:100%}tr{border:1px solid var(--bd);border-radius:12px;padding:6px 12px;margin-bottom:10px;background:var(--bg)}td{display:flex;justify-content:space-between;align-items:center;gap:12px;border:0;padding:6px 0;text-align:right;word-break:break-word}td::before{content:attr(data-label);color:var(--mut);font-weight:600;font-size:.74rem;text-transform:uppercase;text-align:left;flex:none}}
+.mt{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:12px}.mc{border:1px solid var(--bd);border-radius:10px;padding:10px;background:var(--bg)}.mc h3{margin:0 0 4px;font-size:.85rem;display:flex;align-items:center;gap:6px}.mc b{font-size:1.15rem;display:block}.mc small{color:var(--mut)}.mc.all{border-color:var(--ac);border-width:2px}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:6px}.chip{position:relative;border:1.5px solid var(--bd);border-radius:10px;padding:8px;text-align:center;cursor:pointer;font-size:.85rem;margin:0;font-weight:500;min-height:40px;display:flex;align-items:center;justify-content:center}.chip input{position:absolute;opacity:0}.chip:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 14%,transparent);font-weight:700}.chip:has(input:focus-visible){outline:3px solid var(--ac)}.sumcard{grid-area:sum}.formcard{grid-area:form;align-self:start}.mapcard{grid-area:map}#daily{grid-area:daily;min-width:0}main{grid-template-areas:"sum sum" "form daily" "form map"}
+@media(max-width:860px){main{grid-template-areas:none}.sumcard,.formcard,.mapcard,#daily{grid-area:auto}.sumcard{order:1}.formcard{order:2}#daily{order:3}.mapcard{order:4}}
+.day{border:1px solid var(--bd);border-radius:12px;margin-bottom:8px;background:var(--bg)}.day summary{cursor:pointer;padding:10px 12px;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;min-height:44px}.day summary>b:first-child{margin-right:auto}.dl{padding:0 12px 8px}.dr{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-top:1px solid var(--bd);font-size:.9rem}.dr span:last-child{font-weight:700}
+.sm{padding:4px 8px;min-height:32px;font-size:.78rem}.Paid{color:var(--ac);border-color:var(--ac)}.Pending{color:var(--p2);border-color:var(--p2)}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}#toast.on{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Hakot Basura Pledges</h1><small>San Antonio South HOA · Brgy. Langkiwa, Biñan, Laguna</small></div>
+  <div class="hb"><button id="help" type="button" aria-label="Open the step-by-step tutorial">❓ Tutorial</button><button id="theme" aria-label="Toggle light or dark theme">🌙 Dark</button></div>
+</header>
+<main>
+  <section class="card formcard" aria-labelledby="fh">
+    <h2 id="fh">Make a pledge</h2>
+    <form id="f" novalidate>
+      <label for="lib">📚 Pledger library — pick a returning pledger</label><select id="lib"><option value="">— Choose a saved name (optional) —</option></select><p class="hint">Fills in name, address, phase, amount and method from their last pledge.</p>
+      <label for="name">Full name</label>
+      <input type="text" id="name" list="libl" autocomplete="off" placeholder="Juan Dela Cruz" required><datalist id="libl"></datalist>
+      <label for="addr">Address (Block / Lot / Street) — optional</label>
+      <input type="text" id="addr" autocomplete="street-address" placeholder="Blk 5 Lot 12, Phase 2">
+      <label class="na"><input type="checkbox" id="addrna"> Address N/A</label>
+      <p class="hint">Tip: typing “Phase 1” or “Phase 2” in the address selects the phase automatically.</p>
+      <div class="lb">Phase — optional</div>
+      <div class="opts" role="radiogroup" aria-label="Phase">
+        <label class="opt"><input type="radio" name="phase" value="1"><span class="sw" style="background:var(--p1)"></span>Phase 1</label>
+        <label class="opt"><input type="radio" name="phase" value="2"><span class="sw" style="background:var(--p2)"></span>Phase 2</label>
+      </div>
+      <label class="na"><input type="checkbox" id="phna"> Phase N/A</label>
+      <label for="amt">Pledge per month (₱) — minimum ₱40</label>
+      <input type="number" id="amt" inputmode="numeric" min="40" step="1" placeholder="e.g. 40" required>
+      <div class="row" style="margin-top:12px"><span class="lb" style="margin:0">Months covered — optional</span><button type="button" class="sm" id="allm">Select / clear all</button></div>
+      <div class="chips" id="months" role="group" aria-label="Months covered" style="margin-top:6px"></div>
+      <p class="hint" id="tot" aria-live="polite">Months are optional. Enter an amount.</p>
+      <div class="lb">Payment method</div>
+      <div class="opts" role="radiogroup" aria-label="Payment method">
+        <label class="opt"><input type="radio" name="method" value="Cash" checked>Cash</label>
+        <label class="opt"><input type="radio" name="method" value="Bank transfer">Bank</label>
+        <label class="opt"><input type="radio" name="method" value="GCash">GCash</label>
+      </div>
+      <label for="rd">Date received</label><input type="date" id="rd" required>
+      <div id="rcpt">
+        <label for="file">Upload receipt (image)</label>
+        <input type="file" id="file" accept="image/*">
+        <img id="prev" alt="Receipt preview">
+      </div>
+      <p class="err" id="err" role="alert"></p>
+      <button class="pri" type="submit">Submit pledge</button>
+    </form>
+  </section>
+
+  <section class="card mapcard" aria-labelledby="mh">
+    <h2 id="mh">Subdivision map</h2>
+    <div id="mapwrap">
+      <svg id="map" viewBox="0 0 1700 700" role="img" aria-label="Vector map of San Antonio South Phase 1 and Phase 2">
+        <g id="layer"><polygon id="p1" class="ph"/><polygon id="p2" class="ph"/>
+        <text class="lbl" x="460" y="380" text-anchor="middle">PHASE 1</text>
+        <text class="lbl" x="1320" y="380" text-anchor="middle">PHASE 2</text>
+        <g id="dots"></g></g>
+      </svg>
+      <div class="zc"><button id="zi" aria-label="Zoom in">+</button><button id="zo" aria-label="Zoom out">−</button><button id="zr" aria-label="Reset view">⟲</button></div>
+    </div>
+    <div class="leg"><span><i class="sw" style="background:var(--p1)"></i> Phase 1</span><span><i class="sw" style="background:var(--p2)"></i> Phase 2</span><span>● pledge location (approximate) · drag to pan, scroll/+ − to zoom, click a phase to select</span></div>
+    <div class="mt" id="mt" aria-live="polite"></div>
+  </section>
+
+  <section class="card tw sumcard">
+    <div class="row hd"><h2>Pledge summary</h2><div class="acts"><button type="button" id="arch">🗄 Archived (0)</button><button type="button" id="im">⬆ Import Excel</button><button type="button" id="xl">⬇ Export to Excel</button><input type="file" id="imf" accept=".xlsx,.xls,.csv" hidden></div></div>
+    <div class="stats" id="stats"></div>
+    <table><thead><tr><th>#</th><th>Received</th><th>Name</th><th>Address</th><th>Phase</th><th>Method</th><th>Months covered</th><th>Per month</th><th>Total</th><th>Receipt</th><th>Action</th></tr></thead><tbody id="rows"></tbody></table>
+    <p class="hint" id="empty">No pledges yet.</p>
+  </section>
+<section class="card" id="daily"><div class="row hd"><h2>Daily collections</h2><span class="hint">Pledges received each day, cash vs digital (all pledges are counted as received)</span><button type="button" id="dimg">🖼 Export as image</button></div><div id="days"></div><p class="hint" id="dayempty">No collections yet.</p></section>
+</main>
+<div id="tspot" hidden></div>
+<div id="tcard" role="dialog" aria-live="polite" aria-labelledby="tt" hidden>
+  <div class="tc" id="tc"></div><h3 id="tt"></h3><p id="tx"></p><p class="tact" id="ta"></p>
+  <div class="tn"><button type="button" id="tb">← Back</button><button type="button" class="tnx" id="tn">Next →</button></div>
+  <div class="tn"><button type="button" class="tl" id="tskip">Skip tour</button><button type="button" class="tl" id="tnever">Don’t show again</button></div>
+</div>
+<dialog id="ed" aria-labelledby="edt"><form id="ef" novalidate>
+  <h2 id="edt">Edit pledge</h2>
+  <label for="en">Full name</label><input type="text" id="en">
+  <label for="ea">Address — optional</label><input type="text" id="ea"><label class="na"><input type="checkbox" id="ena"> Address N/A</label>
+  <div class="lb">Phase — optional</div><div class="opts"><label class="opt"><input type="radio" name="ep" value="">N/A</label><label class="opt"><input type="radio" name="ep" value="1">Phase 1</label><label class="opt"><input type="radio" name="ep" value="2">Phase 2</label></div>
+  <label for="em">Pledge per month (₱) — minimum ₱40</label><input type="number" id="em" min="40" step="1" inputmode="numeric">
+  <div class="lb">Months covered — optional</div><div class="chips" id="emonths"></div>
+  
+  <div class="lb">Payment method</div><div class="opts"><label class="opt"><input type="radio" name="eh" value="Cash">Cash</label><label class="opt"><input type="radio" name="eh" value="Bank transfer">Bank</label><label class="opt"><input type="radio" name="eh" value="GCash">GCash</label></div>
+  <label for="erd">Date received</label><input type="date" id="erd">
+  <div id="erc"><label for="ef2">Receipt image <span id="erh" class="hint"></span></label><input type="file" id="ef2" accept="image/*"></div>
+  <p class="err" id="ee" role="alert"></p>
+  <div class="row" style="margin-top:12px"><button type="button" id="ecancel">Cancel</button><button type="submit" class="pri" style="width:auto;margin:0">Save changes</button></div>
+</form></dialog>
+<div id="toast" role="status"></div>
+<script>
+const $=s=>document.querySelector(s),H=920,NS="http://www.w3.org/2000/svg";
+// Outlines traced from the plan images (original rotated frame), then rotated upright; Phase 2 placed beside Phase 1.
+const RAW={1:{off:0,h:920,pts:"172,38 335,38 342,205 345,310 480,312 655,315 640,348 520,390 470,402 470,640 545,625 575,850 560,882 450,865 380,702 392,668 440,658 405,520 390,430 320,420 255,440 135,590 105,572 112,400 120,345 262,342 275,372 248,300 252,205 195,95"},
+2:{off:880,h:940,pts:"80,205 190,235 250,330 310,345 375,230 470,240 480,580 610,590 610,690 500,800 440,790 400,660 330,640 200,640 110,540 100,420"}};
+const POLY={};
+for(const k in RAW){const r=RAW[k];POLY[k]=r.pts.split(" ").map(p=>{const[x,y]=p.split(",").map(Number);return[r.h-y+r.off,x]})}
+for(const k in POLY)$("#p"+k).setAttribute("points",POLY[k].map(p=>p.join(",")).join(" "));
+function inside(pt,poly){let c=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const[a,b]=poly[i],[d,e]=poly[j];if((b>pt[1])!=(e>pt[1])&&pt[0]<(d-a)*(pt[1]-b)/(e-b)+a)c=!c}return c}
+function randomDot(ph){const P=POLY[ph],xs=P.map(p=>p[0]),ys=P.map(p=>p[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  for(let i=0;i<500;i++){const q=[x0+Math.random()*(x1-x0),y0+Math.random()*(y1-y0)];if(inside(q,P))return q}return[(x0+x1)/2,(y0+y1)/2]}
+
+// Theme
+const root=document.documentElement;
+function setTheme(t){root.dataset.theme=t;$("#theme").textContent=t==="dark"?"☀️ Light":"🌙 Dark";try{localStorage.setItem("hb-theme",t)}catch(e){}}
+let t0=null;try{t0=localStorage.getItem("hb-theme")}catch(e){}
+setTheme(t0||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"));
+$("#theme").onclick=()=>setTheme(root.dataset.theme==="dark"?"light":"dark");
+
+// Pan / zoom
+const svg=$("#map");let vb={x:0,y:0,w:1700,h:700};
+const setVB=()=>svg.setAttribute("viewBox",`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+function zoom(f,cx=vb.x+vb.w/2,cy=vb.y+vb.h/2){const w=Math.min(1700,Math.max(150,vb.w*f)),k=w/vb.w;vb={x:cx-(cx-vb.x)*k,y:cy-(cy-vb.y)*k,w,h:vb.h*k};setVB()}
+function pt(e){const r=svg.getBoundingClientRect();return[vb.x+(e.clientX-r.left)/r.width*vb.w,vb.y+(e.clientY-r.top)/r.height*vb.h]}
+svg.addEventListener("wheel",e=>{e.preventDefault();const[x,y]=pt(e);zoom(e.deltaY<0?.85:1.18,x,y)},{passive:false});
+let drag=null,moved=false;
+svg.addEventListener("pointerdown",e=>{drag={x:e.clientX,y:e.clientY,vx:vb.x,vy:vb.y};moved=false;svg.setPointerCapture(e.pointerId)});
+svg.addEventListener("pointermove",e=>{if(!drag)return;const r=svg.getBoundingClientRect(),dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.abs(dx)+Math.abs(dy)>5)moved=true;vb.x=drag.vx-dx/r.width*vb.w;vb.y=drag.vy-dy/r.width*vb.w;setVB()});
+svg.addEventListener("pointerup",()=>drag=null);
+$("#zi").onclick=()=>zoom(.7);$("#zo").onclick=()=>zoom(1.4);$("#zr").onclick=()=>{vb={x:0,y:0,w:1700,h:700};setVB()};
+["1","2"].forEach(k=>$("#p"+k).addEventListener("click",()=>{if(!moved)selPhase(k)}));
+
+// Phase selection + preview dot
+let preview=null;
+function selPhase(k,fromAddr){const r=document.querySelector(`input[name=phase][value="${k}"]`);if(!r)return;r.checked=true;$("#phna").checked=false;
+  ["1","2"].forEach(p=>$("#p"+p).classList.toggle("sel",p===k));preview=randomDot(k);draw()}
+document.querySelectorAll("input[name=phase]").forEach(r=>r.onchange=()=>selPhase(r.value));
+$("#addr").addEventListener("input",e=>{const m=e.target.value.match(/ph(?:ase)?\.?\s*(1|2|i{1,2})\b/i);if(m){const k=/^i{2}$/i.test(m[1])||m[1]==="2"?"2":"1";if(!document.querySelector("input[name=phase]:checked")||document.querySelector("input[name=phase]:checked").value!==k)selPhase(k)}});
+
+// Receipt
+const need=()=>document.querySelector("input[name=method]:checked").value!=="Cash";
+document.querySelectorAll("input[name=method]").forEach(r=>r.onchange=()=>$("#rcpt").classList.toggle("on",need()));
+let receipt="";
+$("#file").onchange=e=>{const f=e.target.files[0];receipt="";$("#prev").style.display="none";if(!f)return;
+  const img=new Image,u=URL.createObjectURL(f);img.onload=()=>{const s=Math.min(1,700/Math.max(img.width,img.height)),c=document.createElement("canvas");c.width=img.width*s;c.height=img.height*s;c.getContext("2d").drawImage(img,0,0,c.width,c.height);receipt=c.toDataURL("image/jpeg",.6);$("#prev").src=receipt;$("#prev").style.display="block";URL.revokeObjectURL(u)};
+  img.onerror=()=>say("That file is not a readable image.");img.src=u};
+
+// Data store (shared db when available, else this browser)
+let pledges=[],ALL=[],db=null,showArch=false;
+async function init(){try{if(window.claude){db=await claude.use("db")}}catch(e){db=null}
+  if(db){db.collection("pledges").onSnapshot(s=>{ALL=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);refresh()},()=>{})}
+  else{try{ALL=JSON.parse(localStorage.getItem("hb-pledges")||"[]")}catch(e){}refresh()}}
+async function save(p){if(db){await db.collection("pledges").add(p)}else{p.id="l"+Date.now()+Math.random().toString(36).slice(2,6);ALL.push(p);persist();refresh()}}
+
+// Render
+const peso=n=>"₱"+Number(n).toLocaleString("en-PH");
+const total=p=>Number(p.amount)*((p.months&&p.months.length)||1);
+const monthsTxt=p=>p.months&&p.months.length?`${p.months.length} mo: ${p.months.map(lbl).join(", ")}`:"—";
+const statusCell=p=>{const s=p.status||"Pending",n=s==="Paid"?"Pending":"Paid";return `<span class="tg ${s}">${s}</span>`};
+const tbl=()=>showArch?ALL.filter(p=>p.archived):pledges;
+const actionCell=p=>{const i=esc(p.id);if(p.archived)return `<button type="button" class="sm" data-id="${i}" data-a="rest">Restore</button>`;return `<span class="ab"><button type="button" class="sm" data-id="${i}" data-a="edit">Edit</button><button type="button" class="sm" data-id="${i}" data-a="arch">Archive</button></span>`};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let last=null;
+function draw(){const g=$("#dots");g.innerHTML="";
+  pledges.forEach(p=>{if(!p.phase||p.x==null)return;const c=document.createElementNS(NS,"circle");c.setAttribute("cx",p.x);c.setAttribute("cy",p.y);c.setAttribute("r",9);c.setAttribute("class","dot");c.setAttribute("fill",p.phase==="1"?"var(--p1)":"var(--p2)");const t=document.createElementNS(NS,"title");t.textContent=`${p.name} · Phase ${p.phase}`;c.appendChild(t);g.appendChild(c)});
+  if(preview){const k=document.querySelector("input[name=phase]:checked")?.value||"1",col=k==="1"?"var(--p1)":"var(--p2)";
+    g.insertAdjacentHTML("beforeend",`<circle class="me" cx="${preview[0]}" cy="${preview[1]}" r="12" fill="${col}"/><circle class="dot" cx="${preview[0]}" cy="${preview[1]}" r="12" fill="${col}"/>`)}}
+function render(){
+  $("#rows").innerHTML=tbl().map((p,i)=>`<tr><td>${i+1}</td><td>${new Date(rd(p)+"T00:00:00").toLocaleDateString("en-PH")}</td><td>${esc(p.name)}</td><td>${esc(p.address||"")||"N/A"}</td><td>${p.phase||"N/A"}</td><td>${esc(p.method)}</td><td>${monthsTxt(p)}</td><td>${peso(p.amount)}</td><td>${peso(total(p))}</td><td>${p.receipt?`<a href="${p.receipt}" target="_blank" rel="noopener" style="color:var(--ac)">View</a>`:"—"}</td><td>${actionCell(p)}</td></tr>`).join("");
+  $("#empty").style.display=tbl().length?"none":"block";$("#empty").textContent=showArch?"No archived pledges.":"No pledges yet.";$("#arch").textContent=showArch?"← Back to active":`🗄 Archived (${ALL.length-pledges.length})`;
+  const HEADS=["#","Received","Name","Address","Phase","Method","Months covered","Per month","Total","Receipt","Action"];
+  document.querySelectorAll("#rows tr").forEach(tr=>tr.querySelectorAll("td").forEach((td,i)=>td.dataset.label=HEADS[i]));
+  const grp=[["Phase 1",pledges.filter(p=>p.phase==="1"),"var(--p1)"],["Phase 2",pledges.filter(p=>p.phase==="2"),"var(--p2)"],["Overall total",pledges,""]];
+  $("#mt").innerHTML=grp.map(([n,a,c])=>{const t=a.reduce((s,p)=>s+total(p),0),cs=a.filter(p=>p.method==="Cash").reduce((s,p)=>s+total(p),0);return `<div class="mc${c?"":" all"}"><h3>${c?`<i class="sw" style="background:${c}"></i>`:""}${n}</h3><b>${peso(t)}</b><small>${a.length} pledger${a.length===1?"":"s"}<br>Cash ${peso(cs)} · Digital ${peso(t-cs)}</small></div>`}).join("");
+  const tot=pledges.reduce((a,p)=>a+total(p),0),cash=pledges.filter(p=>p.method==="Cash").reduce((a,p)=>a+total(p),0),ph=k=>pledges.filter(p=>p.phase===k).length;
+  $("#stats").innerHTML=[["Total pledges",pledges.length],["Total pledged",peso(tot)],["Pledge in cash",peso(cash)],["Pledge in digital (Bank + GCash)",peso(tot-cash)],["Phase 1 pledgers",ph("1")],["Phase 2 pledgers",ph("2")]].map(([a,b])=>`<div class="stat"><b>${b}</b><span>${a}</span></div>`).join("");
+  renderDaily();draw()}
+
+// Months, totals, status
+const MN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],lbl=k=>{const[y,m]=k.split("-");return MN[m-1]+" "+y};
+{const n=new Date,o=[];for(let i=0;i<12;i++){const d=new Date(n.getFullYear(),n.getMonth()+i,1);o.push(d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0"))}
+$("#months").innerHTML=o.map(k=>`<label class="chip"><input type="checkbox" value="${k}"><span>${lbl(k)}</span></label>`).join("")}
+const sel=()=>[...document.querySelectorAll("#months input:checked")].map(i=>i.value);
+function upTotal(){const n=sel().length,a=Number($("#amt").value)||0;$("#tot").textContent=!a?"Months are optional. Enter an amount.":n?`${n} month${n>1?"s":""} × ${peso(a)} = ${peso(n*a)}`:`${peso(a)} (no months selected, counted as one payment)`}
+$("#months").onchange=upTotal;$("#amt").oninput=upTotal;
+$("#allm").onclick=()=>{const b=[...document.querySelectorAll("#months input")],all=b.every(i=>i.checked);b.forEach(i=>i.checked=!all);upTotal()};
+async function setStatus(id,s){try{if(db){await db.collection("pledges").doc(id).update({status:s})}else{ALL.find(x=>x.id===id).status=s;persist();refresh()}}catch(e){say("Could not update status.")}}
+const persist=()=>{try{localStorage.setItem("hb-pledges",JSON.stringify(ALL))}catch(e){say("Saved for this session only (storage is full).")}};
+const refresh=()=>{pledges=ALL.filter(p=>!p.archived);buildLib();render()};
+async function patch(id,f){try{if(db){await db.collection("pledges").doc(id).update(f)}else{Object.assign(ALL.find(x=>x.id===id),f);persist();refresh()}return true}catch(e){say("Could not save changes.");return false}}
+$("#arch").onclick=()=>{showArch=!showArch;render()};
+let arm=null;
+$("#rows").onclick=e=>{const b=e.target.closest("button[data-id]");if(!b)return;const id=b.dataset.id,a=b.dataset.a;
+ if(a==="edit")return openEdit(id);
+ if(a==="arch"){if(arm!==id){arm=id;b.textContent="Confirm?";setTimeout(()=>{if(arm===id){arm=null;b.textContent="Archive"}},3000);return}arm=null;patch(id,{archived:true}).then(ok=>ok&&say("Pledge archived. Open Archived to restore it."));return}
+ if(a==="rest"){patch(id,{archived:false}).then(ok=>ok&&say("Pledge restored."));return}
+ };
+$("#addrna").onchange=e=>{const a=$("#addr");a.disabled=e.target.checked;if(e.target.checked){a.value="";a.placeholder="N/A"}else a.placeholder="Blk 5 Lot 12, Phase 2"};
+$("#phna").onchange=e=>{if(e.target.checked){document.querySelectorAll("input[name=phase]").forEach(r=>r.checked=false);["1","2"].forEach(p=>$("#p"+p).classList.remove("sel"));preview=null;draw()}};
+$("#ena").onchange=e=>{$("#ea").disabled=e.target.checked;if(e.target.checked)$("#ea").value=""};
+let eid=null,erec="";
+function eUp(){const c=document.querySelector("input[name=eh]:checked").value!=="Cash";$("#erc").style.display=c?"block":"none";$("#erh").textContent=erec?"(receipt on file — choose a file to replace it)":"(required)"}
+function openEdit(id){const p=ALL.find(x=>x.id===id);if(!p)return;eid=id;erec=p.receipt||"";
+ $("#en").value=p.name;$("#ea").value=p.address||"";$("#ena").checked=!p.address;$("#ea").disabled=!p.address;$("#em").value=p.amount;$("#erd").value=rd(p);$("#ee").textContent="";$("#ef2").value="";
+ document.querySelector(`input[name=ep][value="${p.phase||""}"]`).checked=true;
+ 
+ document.querySelector(`input[name=eh][value="${p.method}"]`).checked=true;
+ const have=new Set(p.months||[]),n=new Date,o=new Set(have);for(let i=0;i<12;i++){const d=new Date(n.getFullYear(),n.getMonth()+i,1);o.add(d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0"))}
+ $("#emonths").innerHTML=[...o].sort().map(k=>`<label class="chip"><input type="checkbox" value="${k}"${have.has(k)?" checked":""}><span>${lbl(k)}</span></label>`).join("");
+ eUp();$("#ed").showModal()}
+document.querySelectorAll("input[name=eh]").forEach(r=>r.onchange=eUp);
+$("#ef2").onchange=e=>{const f=e.target.files[0];if(!f)return;const img=new Image,u=URL.createObjectURL(f);img.onload=()=>{const s=Math.min(1,700/Math.max(img.width,img.height)),c=document.createElement("canvas");c.width=img.width*s;c.height=img.height*s;c.getContext("2d").drawImage(img,0,0,c.width,c.height);erec=c.toDataURL("image/jpeg",.6);eUp();URL.revokeObjectURL(u)};img.onerror=()=>$("#ee").textContent="That file is not a readable image.";img.src=u};
+$("#ecancel").onclick=()=>$("#ed").close();
+$("#ef").onsubmit=async e=>{e.preventDefault();const p=ALL.find(x=>x.id===eid),er=m=>{$("#ee").textContent=m},name=$("#en").value.trim(),address=$("#ena").checked?"":$("#ea").value.trim(),amount=Number($("#em").value),phase=document.querySelector("input[name=ep]:checked").value,method=document.querySelector("input[name=eh]:checked").value,months=[...document.querySelectorAll("#emonths input:checked")].map(i=>i.value).sort();
+ if(!name)return er("Please enter a name.");if(!(amount>=40))return er("Minimum pledge is ₱40 per month.");if(method!=="Cash"&&!erec)return er(`Please upload the ${method} receipt image.`);
+ const f={name,address,phase,amount,months,method,rd:$("#erd").value||dk(p.ts),receipt:method==="Cash"?"":erec};if(phase!==(p.phase||"")){const[x,y]=phase?randomDot(phase):[null,null];f.x=x;f.y=y}
+ if(await patch(eid,f)){$("#ed").close();say("Pledge updated.")}};
+// Submit
+function say(m){const t=$("#toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),3200)}
+$("#f").onsubmit=async e=>{e.preventDefault();const name=$("#name").value.trim(),address=$("#addr").value.trim(),amount=Number($("#amt").value),ph=document.querySelector("input[name=phase]:checked"),method=document.querySelector("input[name=method]:checked").value;
+  const er=m=>{$("#err").textContent=m;return};
+  if(!name)return er("Please enter your full name.");
+  if(!(amount>=40))return er("Minimum pledge is ₱40 per month.");const months=sel().sort();if(method!=="Cash"&&!receipt)return er(`Please upload your ${method} receipt image.`);
+  $("#err").textContent="";const pv=ph?ph.value:"",[x,y]=pv?(preview&&inside(preview,POLY[pv])?preview:randomDot(pv)):[null,null];
+  try{await save({name,address,phase:pv,method,amount,months,receipt:method==="Cash"?"":receipt,x,y,rd:$("#rd").value||today(),ts:Date.now()})}catch(x){return er("Could not save the pledge. Please try again.")}
+  preview=null;receipt="";e.target.reset();$("#rd").value=today();$("#addr").disabled=false;upTotal();$("#rcpt").classList.remove("on");$("#prev").style.display="none";["1","2"].forEach(p=>$("#p"+p).classList.remove("sel"));render();say("Salamat! Your pledge was recorded.")};
+
+// Excel export
+$("#xl").onclick=async()=>{if(!pledges.length)return say("No pledges to export yet.");
+  const wb=XLSX.utils.book_new(),tot=a=>a.reduce((s,p)=>s+total(p),0);
+  const rows=pledges.map((p,i)=>({"No.":i+1,Date:new Date(p.ts).toLocaleString("en-PH"),Name:p.name,Address:p.address||"N/A",Phase:p.phase?"Phase "+p.phase:"N/A","Payment method":p.method,"Months covered":(p.months||[]).map(lbl).join(", "),"No. of months":(p.months||[1]).length,"Per month (PHP)":Number(p.amount),"Total (PHP)":total(p),"Date received":rd(p),"Receipt attached":p.receipt?"Yes":"No"}));
+  const sum=[["Hakot Basura Pledges – San Antonio South HOA"],["Generated",new Date().toLocaleString("en-PH")],[],["Group","Pledges","Total (PHP)"]];
+  ["1","2"].forEach(k=>{const a=pledges.filter(p=>p.phase===k);sum.push(["Phase "+k,a.length,tot(a)])});
+  ["Cash","Bank transfer","GCash"].forEach(m=>{const a=pledges.filter(p=>p.method===m);sum.push([m,a.length,tot(a)])});
+  {const a=pledges.filter(p=>p.method!=="Cash");sum.push(["Digital (Bank + GCash)",a.length,tot(a)])}
+  sum.push(["ALL",pledges.length,tot(pledges)]);
+  const s1=XLSX.utils.aoa_to_sheet(sum);s1["!cols"]=[{wch:30},{wch:12},{wch:16}];
+  const s2=XLSX.utils.json_to_sheet(rows);s2["!cols"]=[{wch:5},{wch:20},{wch:26},{wch:36},{wch:10},{wch:16},{wch:40},{wch:12},{wch:14},{wch:14},{wch:10},{wch:16}];
+  XLSX.utils.book_append_sheet(wb,s1,"Summary");XLSX.utils.book_append_sheet(wb,s2,"All pledges");
+  const s3=XLSX.utils.json_to_sheet(pledges.slice().sort((a,b)=>rd(a)<rd(b)?1:-1).map(p=>({"Date received":rd(p),Name:p.name,Phase:p.phase?"Phase "+p.phase:"N/A",Method:p.method,"Type":p.method==="Cash"?"Cash":"Digital","Total (PHP)":total(p)})));XLSX.utils.book_append_sheet(wb,s3,"Daily received");
+  const fn="hakot-basura-pledges.xlsx";
+  try{const dl=window.claude&&await claude.use("downloads");
+    if(dl){await dl.save({filename:fn,data:XLSX.write(wb,{bookType:"xlsx",type:"array"})})}else{XLSX.writeFile(wb,fn)}}
+  catch(e){if(!e||e.code!=="declined")say("Export failed. Please try again.")}};
+$("#im").onclick=()=>$("#imf").click();
+$("#imf").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
+ try{const wb=XLSX.read(await f.arrayBuffer(),{type:"array"}),ws=wb.Sheets["All pledges"]||wb.Sheets[wb.SheetNames[wb.SheetNames.length-1]],rows=XLSX.utils.sheet_to_json(ws,{defval:""});
+ let ok=0,dup=0,bad=0;const key=p=>[p.name,p.address,p.method,p.amount,(p.months||[]).join("|")].join("~").toLowerCase(),seen=new Set(pledges.map(key));
+ for(const r of rows){const ph=String(r.Phase).match(/[12]/),name=String(r.Name||"").trim(),address=String(r.Address||"").trim().replace(/^n\/a$/i,""),amount=Number(r["Per month (PHP)"]);
+  const months=String(r["Months covered"]||"").split(",").map(s=>s.trim().match(/^([A-Za-z]{3})\w*\s+(\d{4})$/)).filter(Boolean).map(m=>{const i=MN.findIndex(x=>x.toLowerCase()===m[1].toLowerCase());return i<0?null:m[2]+"-"+String(i+1).padStart(2,"0")}).filter(Boolean);
+  if(!name||!(amount>=40)){bad++;continue}
+  const method=["Cash","Bank transfer","GCash"].find(m=>m.toLowerCase()===String(r["Payment method"]).trim().toLowerCase())||"Cash",[x,y]=ph?randomDot(ph[0]):[null,null];
+  const p={name,address,phase:ph?ph[0]:"",method,amount,months:months.sort(),rd:/^\d{4}-\d{2}-\d{2}$/.test(String(r["Date received"]))?String(r["Date received"]):dk(Date.now()),receipt:"",x,y,ts:Date.now()+ok};
+  if(seen.has(key(p))){dup++;continue}seen.add(key(p));await save(p);ok++}
+ say(`Imported ${ok}${dup?`, ${dup} duplicate skipped`:""}${bad?`, ${bad} invalid skipped`:""}.`)}catch(err){say("Could not read that file. Use an Excel file exported from this page.")}};
+// Daily + library
+const dk=ts=>{const d=new Date(ts);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")},today=()=>dk(Date.now()),rd=p=>p.rd||dk(p.ts);
+$("#rd").value=today();let openD=null,lib=[];
+$("#days").addEventListener("toggle",()=>{openD=new Set([...document.querySelectorAll("#days details[open]")].map(d=>d.dataset.k))},true);
+function renderDaily(){const g={};pledges.forEach(p=>(g[rd(p)]=g[rd(p)]||[]).push(p));const ks=Object.keys(g).sort().reverse();$("#dayempty").style.display=ks.length?"none":"block";
+ $("#days").innerHTML=ks.map((k,i)=>{const a=g[k].sort((x,y)=>y.ts-x.ts),t=a.reduce((s,p)=>s+total(p),0),c=a.filter(p=>p.method==="Cash").reduce((s,p)=>s+total(p),0);
+  return `<details class="day" data-k="${k}"${(openD?openD.has(k):i===0)?" open":""}><summary><b>${new Date(k+"T00:00:00").toLocaleDateString("en-PH",{weekday:"short",month:"short",day:"numeric",year:"numeric"})}${k===today()?" · Today":""}</b><span>${a.length} pledge${a.length===1?"":"s"}</span><span>Cash ${peso(c)}</span><span>Digital ${peso(t-c)}</span><b>${peso(t)}</b></summary><div class="dl">${a.map(p=>`<div class="dr"><span>${esc(p.name)} <small class="hint">${p.phase?"Phase "+p.phase+" · ":""}${esc(p.method)}</small></span><span>${peso(total(p))}</span></div>`).join("")}</div></details>`}).join("")}
+function buildLib(){const m=new Map();ALL.forEach(p=>{const k=(p.name||"").trim().toLowerCase(),o=m.get(k);if(k&&(!o||p.ts>=o.ts))m.set(k,p)});lib=[...m.values()].sort((a,b)=>a.name.localeCompare(b.name));
+ const cur=$("#lib").value;$("#lib").innerHTML='<option value="">— Choose a saved name (optional) —</option>'+lib.map(p=>`<option value="${esc(p.name.trim().toLowerCase())}">${esc(p.name)}${p.address?" · "+esc(p.address):""}</option>`).join("");$("#lib").value=cur;$("#libl").innerHTML=lib.map(p=>`<option value="${esc(p.name)}">`).join("")}
+function useLib(k){const p=lib.find(x=>x.name.trim().toLowerCase()===k);if(!p)return;$("#name").value=p.name;
+ if(p.address){$("#addrna").checked=false;$("#addr").disabled=false;$("#addr").value=p.address}else{$("#addrna").checked=true;$("#addrna").onchange({target:$("#addrna")})}
+ if(p.phase)selPhase(p.phase);else{$("#phna").checked=true;$("#phna").onchange({target:$("#phna")})}
+ $("#amt").value=p.amount;const r=document.querySelector(`input[name=method][value="${p.method}"]`);if(r){r.checked=true;r.onchange()}upTotal();say("Loaded "+p.name+" from the library.")}
+$("#lib").onchange=e=>useLib(e.target.value);$("#name").addEventListener("change",e=>{if(!$("#addr").value&&!$("#amt").value)useLib(e.target.value.trim().toLowerCase())});
+$("#dimg").onclick=async()=>{const g={};pledges.forEach(p=>(g[rd(p)]=g[rd(p)]||[]).push(p));const ks=Object.keys(g).sort().reverse();if(!ks.length)return say("No collections to export yet.");
+ const W=900,pad=28,S=2,F="system-ui,-apple-system,Segoe UI,Roboto,sans-serif";let h=pad+92+70;ks.forEach(k=>h+=72+g[k].length*28);
+ const c=document.createElement("canvas");c.width=W*S;c.height=h*S;const x=c.getContext("2d");x.scale(S,S);x.fillStyle="#fff";x.fillRect(0,0,W,h);
+ const T=(s,px,py,o={})=>{x.font=`${o.b?"700 ":""}${o.s||15}px ${F}`;x.fillStyle=o.c||"#17211b";x.textAlign=o.a||"left";x.fillText(s,px,py)};
+ let y=pad+22;T("Hakot Basura – Daily collections",pad,y,{b:1,s:22});y+=24;T("San Antonio South HOA · generated "+new Date().toLocaleString("en-PH"),pad,y,{s:13,c:"#5b6a60"});y+=22;x.fillStyle="#1f7a4d";x.fillRect(pad,y,W-2*pad,3);y+=30;
+ let gt=0,gc=0;
+ ks.forEach(k=>{const a=g[k].slice().sort((p,q)=>p.ts-q.ts),t=a.reduce((s,p)=>s+total(p),0),cs=a.filter(p=>p.method==="Cash").reduce((s,p)=>s+total(p),0);gt+=t;gc+=cs;
+  x.fillStyle="#eef3ef";x.fillRect(pad,y-18,W-2*pad,50);
+  T(new Date(k+"T00:00:00").toLocaleDateString("en-PH",{weekday:"long",month:"long",day:"numeric",year:"numeric"}),pad+12,y+2,{b:1,s:16});
+  T(`${a.length} pledge${a.length===1?"":"s"} · Cash ${peso(cs)} · Digital ${peso(t-cs)}`,pad+12,y+24,{s:13,c:"#5b6a60"});T(peso(t),W-pad-12,y+14,{b:1,s:18,a:"right"});y+=62;
+  a.forEach(p=>{T(p.name,pad+12,y,{s:15});T(`${p.phase?"Phase "+p.phase+" · ":""}${p.method}`,W-pad-130,y,{s:13,c:"#5b6a60",a:"right"});T(peso(total(p)),W-pad-12,y,{b:1,s:15,a:"right"});y+=28});y+=10});
+ x.fillStyle="#1f7a4d";x.fillRect(pad,y,W-2*pad,3);y+=30;T(`Total ${peso(gt)}  ·  Cash ${peso(gc)}  ·  Digital ${peso(gt-gc)}`,pad,y,{b:1,s:16});
+ const blob=await new Promise(r=>c.toBlob(r,"image/png")),fn="daily-collections-"+today()+".png";
+ try{const dl=window.claude&&await claude.use("downloads");if(dl){await dl.save({filename:fn,data:new Uint8Array(await blob.arrayBuffer())})}else{const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=fn;a.click()}}catch(e){if(!e||e.code!=="declined")say("Export failed. Please try again.")}};
+// Guided tutorial
+const TOUR=[
+{t:"Welcome! 👋",x:"This quick tour shows you how to make a Hakot Basura pledge. You can skip it at any time and reopen it with the Tutorial button."},
+{t:"1. Your details",x:"Pick a returning pledger from the library or type a new full name. Address and phase are optional — tick N/A if they don’t apply. Writing “Phase 1” or “Phase 2” in the address picks the phase automatically.",s:["label[for=name]","#addr"],a:"👉 Fill in your name and address here"},
+{t:"2. Choose your phase",x:"Optionally select Phase 1 or Phase 2. A pulsing dot appears inside that phase on the map. You can also click a phase on the map.",s:[".opts[aria-label=Phase]"],a:"👉 Tap Phase 1 or Phase 2"},
+{t:"3. Amount and months",x:"Enter your pledge per month (minimum ₱40), then optionally tap the months you want to cover. The total is calculated for you.",s:["label[for=amt]","#months","#tot"],a:"👉 Enter an amount and pick the months"},
+{t:"4. Payment method",x:"Choose Cash, Bank transfer or GCash. For Bank transfer or GCash, an upload box appears. Attach a photo of your receipt there.",s:[".opts[aria-label='Payment method']","#rcpt"],a:"👉 Pick a method (upload your receipt if asked)"},
+{t:"5. Submit",x:"Check your entries, then submit. If something is missing, a red message appears just above this button.",s:[".pri"],a:"👉 Tap Submit pledge"},
+{t:"6. The subdivision map",x:"Phase 1 and Phase 2 are shown together. Drag to pan, use the mouse wheel or + / − to zoom, and click a phase to select it. Dots mark pledges.",s:["#mapwrap"],a:"👉 Try zooming or clicking a phase"},
+{t:"7. Totals per phase",x:"See the number of pledgers and the total pledged in each phase, plus the overall total, split into paid and pending.",s:["#mt"]},
+{t:"8. Pledge summary",x:"Every pledge is listed here. Each row shows when it was received, and you can edit or archive it. Below it, Daily collections lists everything received per day.",s:[".hd","#stats"]},
+{t:"9. Export and import",x:"Export the whole summary to Excel, or import a file you exported earlier to add many pledges at once. That’s it, you’re ready!",s:[".acts"],a:"👉 Use these buttons when you need a spreadsheet"}];
+let ti=0,tourOn=false;
+function place(){const st=TOUR[ti],c=$("#tcard"),sp=$("#tspot"),mob=innerWidth<=600;
+ const rs=(st.s||[]).flatMap(q=>[...document.querySelectorAll(q)]).map(e=>e.getBoundingClientRect()).filter(r=>r.width>0&&r.height>0);
+ if(!rs.length){sp.style.cssText=`left:${innerWidth/2}px;top:${innerHeight/2}px;width:0;height:0;box-shadow:0 0 0 9999px rgba(0,0,0,.58)`;if(!mob){c.style.left=Math.max(12,innerWidth/2-c.offsetWidth/2)+"px";c.style.top=Math.max(12,innerHeight/2-c.offsetHeight/2)+"px"}return}
+ const l=Math.min(...rs.map(r=>r.left))-8,tp=Math.min(...rs.map(r=>r.top))-8,rt=Math.max(...rs.map(r=>r.right))+8,b=Math.max(...rs.map(r=>r.bottom))+8;
+ sp.style.cssText=`left:${l}px;top:${tp}px;width:${rt-l}px;height:${b-tp}px`;
+ if(mob)return;
+ const cw=c.offsetWidth,ch=c.offsetHeight;let x=Math.min(Math.max(12,l),innerWidth-cw-12),y=b+12;
+ if(y+ch>innerHeight-12){y=tp-ch-12;if(y<12){x=rt+12<=innerWidth-cw-12?rt+12:Math.max(12,l-cw-12);y=Math.min(Math.max(12,tp),innerHeight-ch-12)}}
+ c.style.left=x+"px";c.style.top=y+"px"}
+function show(i){ti=i;const st=TOUR[i];tourOn=true;$("#tspot").hidden=false;$("#tcard").hidden=false;
+ $("#tc").textContent=`Step ${i+1} of ${TOUR.length}`;$("#tt").textContent=st.t;$("#tx").textContent=st.x;$("#ta").textContent=st.a||"";$("#ta").hidden=!st.a;$("#tb").disabled=i===0;$("#tn").textContent=i===TOUR.length-1?"Finish ✓":"Next →";
+ const first=(st.s||[]).map(q=>document.querySelector(q)).find(Boolean);
+ if(first){const r=first.getBoundingClientRect(),lim=innerHeight-(innerWidth<=600?250:60);if(r.top<80||r.bottom>lim)scrollTo({top:scrollY+r.top-100,behavior:"smooth"})}
+ place();setTimeout(place,350);setTimeout(place,750);$("#tn").focus({preventScroll:true})}
+function endTour(never){tourOn=false;$("#tspot").hidden=true;$("#tcard").hidden=true;if(never){try{localStorage.setItem("hb-tour","1")}catch(e){}}}
+$("#tn").onclick=()=>ti>=TOUR.length-1?endTour(true):show(ti+1);
+$("#tb").onclick=()=>ti>0&&show(ti-1);
+$("#tskip").onclick=()=>endTour(false);$("#tnever").onclick=()=>endTour(true);$("#help").onclick=()=>show(0);
+addEventListener("scroll",()=>tourOn&&place(),{passive:true});addEventListener("resize",()=>tourOn&&place());
+document.addEventListener("change",()=>tourOn&&setTimeout(place,60));
+addEventListener("keydown",e=>{if(tourOn&&e.key==="Escape")endTour(false)});
+{let seen=null;try{seen=localStorage.getItem("hb-tour")}catch(e){}if(!seen)setTimeout(()=>show(0),800)}
+init();
+</script>
+</body>
+</html>
