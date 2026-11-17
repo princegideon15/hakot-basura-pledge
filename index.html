@@ -4,9 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#146c43">
-<title>Hakot Basura · San Antonio South HOA</title>
+<title>Bayanihan · San Antonio South HOA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 :root{--bg:#faf7f0;--card:#fff;--tx:#1c211d;--mut:#4a584f;--bd:#cfd8cf;--ac:#146c43;--acx:#fff;--gold:#f5b942;--p1:#1f6fd1;--p2:#c46a10;--map:#eef3ef;--err:#b3261e;--sh:0 4px 18px rgba(20,60,40,.10);color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101712;--card:#1a231c;--tx:#f1f5f1;--mut:#b4c4b8;--bd:#34453a;--ac:#5fd39a;--acx:#06210f;--p1:#7db6ff;--p2:#ffb067;--map:#121b15;--err:#ff9a92;--sh:none;color-scheme:dark}}
@@ -131,6 +132,16 @@ main.v{display:block;max-width:820px;padding-top:16px}
 .stats{display:grid}
 /* ===== Premium layer ===== */
 html,body{overflow-x:clip;max-width:100%}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.dgrid button{min-height:62px;font-weight:800;margin:0}.dgrid .pri{margin-top:0;font-size:1.05rem}.dgrid.sh button{border:2px solid var(--ac);color:var(--ac);background:color-mix(in srgb,var(--ac) 8%,transparent)}
+header#top .lg{border-radius:17px;box-shadow:0 0 0 2px rgba(255,255,255,.4),0 8px 18px rgba(0,0,0,.25)}
+#ld .big{border-radius:32px;box-shadow:0 0 0 4px rgba(255,255,255,.35),0 18px 34px rgba(0,0,0,.3)}
+.truck.crew{width:100px;height:100px;margin-left:-50px;bottom:4px;animation:walk 1.6s ease-in-out infinite alternate}
+@keyframes walk{0%{transform:translate(-24px,0)}25%{transform:translate(-12px,-5px)}50%{transform:translate(0,0)}75%{transform:translate(12px,-5px)}100%{transform:translate(24px,0)}}
+input[type=date][id]{-webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;max-width:100%;height:60px;min-height:60px;line-height:1.2;text-align:left;padding:0 52px 0 16px;margin:0;box-sizing:border-box;-webkit-text-fill-color:var(--tx);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23778a7f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='3'/%3E%3Cpath d='M8 3v4M16 3v4M3 10h18'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:24px}
+input[type=date]::-webkit-date-and-time-value{text-align:left;min-height:1.4em;margin:0;padding:0}
+input[type=date]::-webkit-datetime-edit{padding:0}
+input[type=date]::-webkit-calendar-picker-indicator{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.dq{display:flex;gap:8px;margin-top:10px}.dq button{min-height:46px;padding:8px 18px;border-radius:99px;font-weight:700}
 .ddw{position:relative}.dd{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:25;background:var(--card);border:2px solid var(--ac);border-radius:18px;box-shadow:0 18px 36px -12px rgba(0,0,0,.4);max-height:min(290px,42vh);overflow-y:auto;animation:up .2s;-webkit-overflow-scrolling:touch}
 .dd button{display:flex;width:100%;text-align:left;gap:12px;align-items:center;border:0;border-radius:0;padding:10px 14px;min-height:64px;background:none;font-weight:500;line-height:1.35}.dd button+button{border-top:1px solid var(--bd)}
 .dd button:hover,.dd button.on{background:color-mix(in srgb,var(--ac) 12%,transparent)}.dd .av{width:40px;height:40px;border-radius:14px;font-size:1.05rem}.dd b{font-size:1.05rem}.dd small{color:var(--mut);font-size:.85rem}
@@ -202,13 +213,13 @@ button.pri{background:linear-gradient(135deg,#0f7a4b,#22a468);border:0;border-ra
 </head>
 <body class="">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#146c43"/><path d="M19 27h26l-2.4 24.4a3 3 0 0 1-3 2.6H24.4a3 3 0 0 1-3-2.6z" fill="#fff"/><rect x="15" y="21" width="34" height="5.5" rx="2.7" fill="#f5b942"/><path d="M26.5 21v-3a2.5 2.5 0 0 1 2.5-2.5h6a2.5 2.5 0 0 1 2.5 2.5v3" fill="none" stroke="#f5b942" stroke-width="3"/><path d="M32 49c-5.500 0-8.500-4.500-7.500-10.500 6.500-1 11.500 2.500 12.500 8-1 1.800-3 2.500-5 2.500z" fill="#146c43"/><path d="M31 48c0-4 1.500-7.500 5-9.500" fill="none" stroke="#fff" stroke-width="1.800" stroke-linecap="round"/></symbol></defs></svg><div id="ld" role="status" aria-label="Loading Hakot Basura"><svg class="big"><use href="#logo"/></svg><h2>Hakot Basura</h2><p>Pledges · San Antonio South HOA</p>
-<div class="road"><svg class="truck" viewBox="0 0 120 64" aria-hidden="true"><rect x="4" y="8" width="66" height="38" rx="7" fill="#f5b942"/><rect x="10" y="14" width="54" height="5" rx="2.500" fill="#fff" opacity=".55"/><path d="M74 20h22l16 16v14H74z" fill="#fff"/><path d="M80 25h14l9 10H80z" fill="#9fd8ef"/><rect x="4" y="46" width="108" height="6" rx="3" fill="#0b3f27"/><g class="wh"><circle cx="30" cy="54" r="9" fill="#222"/><circle cx="30" cy="54" r="4" fill="#ccc"/><path d="M30 46v16M22 54h16" stroke="#777" stroke-width="2"/></g><g class="wh"><circle cx="92" cy="54" r="9" fill="#222"/><circle cx="92" cy="54" r="4" fill="#ccc"/><path d="M92 46v16M84 54h16" stroke="#777" stroke-width="2"/></g></svg></div>
+<symbol id="art" viewBox="0 0 64 64"><path d="M32 7 53 24H11z" fill="#f5b942"/><path d="M32 7 53 24" stroke="#e29f1f" stroke-width="1" fill="none"/><rect x="19" y="24" width="26" height="12" fill="#fff"/><path d="M32 34c-3.600-2.400-5-4.100-5-5.900 0-1.500 1.100-2.600 2.500-2.600 1 0 1.900.5 2.500 1.400.6-.9 1.500-1.400 2.500-1.400 1.400 0 2.500 1.100 2.500 2.600 0 1.800-1.400 3.500-5 5.900z" fill="#146c43"/><rect x="8" y="36.500" width="48" height="3.500" rx="1.700" fill="#e9dfc4"/><path d="M13.5 49.5 L12 40.5 M22.5 49.5 L24 40.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="45" r="3.2" fill="#fff"/><path d="M12.5 59V54.5a5.5 5.5 0 0 1 11 0V59z" fill="#fff"/><path d="M27.5 49.5 L26 40.5 M36.5 49.5 L38 40.5" fill="none" stroke="#f5b942" stroke-width="2" stroke-linecap="round"/><circle cx="32" cy="45" r="3.2" fill="#f5b942"/><path d="M26.5 59V54.5a5.5 5.5 0 0 1 11 0V59z" fill="#f5b942"/><path d="M41.5 49.5 L40 40.5 M50.5 49.5 L52 40.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="46" cy="45" r="3.2" fill="#fff"/><path d="M40.5 59V54.5a5.5 5.5 0 0 1 11 0V59z" fill="#fff"/></symbol><symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#146c43"/><path d="M32 7 53 24H11z" fill="#f5b942"/><path d="M32 7 53 24" stroke="#e29f1f" stroke-width="1" fill="none"/><rect x="19" y="24" width="26" height="12" fill="#fff"/><path d="M32 34c-3.600-2.400-5-4.100-5-5.900 0-1.500 1.100-2.600 2.500-2.600 1 0 1.900.5 2.500 1.400.6-.9 1.500-1.400 2.500-1.400 1.400 0 2.500 1.100 2.500 2.600 0 1.800-1.400 3.500-5 5.900z" fill="#146c43"/><rect x="8" y="36.500" width="48" height="3.500" rx="1.700" fill="#e9dfc4"/><path d="M13.5 49.5 L12 40.5 M22.5 49.5 L24 40.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="45" r="3.2" fill="#fff"/><path d="M12.5 59V54.5a5.5 5.5 0 0 1 11 0V59z" fill="#fff"/><path d="M27.5 49.5 L26 40.5 M36.5 49.5 L38 40.5" fill="none" stroke="#f5b942" stroke-width="2" stroke-linecap="round"/><circle cx="32" cy="45" r="3.2" fill="#f5b942"/><path d="M26.5 59V54.5a5.5 5.5 0 0 1 11 0V59z" fill="#f5b942"/><path d="M41.5 49.5 L40 40.5 M50.5 49.5 L52 40.5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="46" cy="45" r="3.2" fill="#fff"/><path d="M40.5 59V54.5a5.5 5.5 0 0 1 11 0V59z" fill="#fff"/></symbol></defs></svg><div id="ld" role="status" aria-label="Loading Bayanihan"><svg class="big"><use href="#logo"/></svg><h2>Bayanihan</h2><p>Together, we lift our community</p>
+<div class="road"><svg class="truck crew" viewBox="0 0 64 64" aria-hidden="true"><use href="#art"/></svg></div>
 <div class="bar"><i></i></div><small>Getting things ready…</small></div>
 <div id="ok" role="alert"><div class="okc"><svg viewBox="0 0 120 120"><circle class="c" cx="60" cy="60" r="48"/><path class="k" d="M38 62l16 16 30-34"/></svg><h2 id="oh">Salamat po!</h2><p id="op">Saved.</p></div></div>
 <nav id="bn" aria-label="Go to section"><span class="ind"></span><a href="#pledges" class=on><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.500-7-10a4 4 0 0 1 7-2.600A4 4 0 0 1 19 11c0 5.500-7 10-7 10z"/></svg>Pledges</a><a href="#library"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h13a1 1 0 0 1 1 1v14H6a1 1 0 0 0-1 1z"/><path d="M5 4v16M9 8h6"/></svg>Library</a><a href="#expenses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>Expenses</a><a href="#daily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>Daily</a><a href="#summary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>Summary</a></nav>
 <div id="app">
-<header id="top"><a class="brand" href="#top" aria-label="Hakot Basura home"><svg class="lg"><use href="#logo"/></svg><div><h1>Hakot Basura</h1><small>Pledges · San Antonio South HOA<br>Brgy. Langkiwa, Biñan, Laguna</small></div></a>
+<header id="top"><a class="brand" href="#top" aria-label="Bayanihan home"><svg class="lg"><use href="#logo"/></svg><div><h1>Bayanihan</h1><small>San Antonio South HOA<br>Brgy. Langkiwa, Biñan, Laguna</small></div></a>
   <div class="hb"><button id="help" type="button" aria-label="Open the step-by-step guide">❓ How to use</button><button id="tsz" type="button" aria-label="Change text size">🔠 Text size</button><button id="theme" aria-label="Toggle light or dark mode">🌙 Dark mode</button></div></header>
 <main class="v">
 <section class="view on" id="v-pledges">
@@ -225,7 +236,7 @@ button.pri{background:linear-gradient(135deg,#0f7a4b,#22a468);border:0;border-ra
         <label class="opt"><input type="radio" name="method" value="Bank transfer">Bank</label>
         <label class="opt"><input type="radio" name="method" value="GCash">GCash</label>
       </div>
-      <label for="rd">Date received</label><input type="date" id="rd">
+      <label for="rd">Date received</label><input type="date" id="rd"><div class="dq"><button type="button" data-d="0">Today</button><button type="button" data-d="1">Yesterday</button></div>
       <button type="button" class="more" id="more">＋ Add address, phase &amp; receipt (optional)</button>
       <div id="opt" hidden>
         <label for="addr">Complete address</label><input type="text" id="addr" autocomplete="street-address" placeholder="Blk 5 Lot 12, Phase 2">
@@ -282,7 +293,7 @@ button.pri{background:linear-gradient(135deg,#0f7a4b,#22a468);border:0;border-ra
     <form id="xf" novalidate>
       <label for="xi">What was it for?</label><input type="text" id="xi" autocomplete="off" placeholder="e.g. Truck fuel, driver’s pay"><div class="qa" id="xq"><button type="button" data-q="Truck fuel">⛽ Fuel</button><button type="button" data-q="Driver’s pay">👷 Driver’s pay</button><button type="button" data-q="Repairs">🔧 Repairs</button><button type="button" data-q="Supplies">🧤 Supplies</button></div>
       <label for="xa">Amount spent (₱)</label><div class="money"><span>₱</span><input type="number" id="xa" inputmode="decimal" min="1" step="any" placeholder="0"></div>
-      <label for="xd">Date spent</label><input type="date" id="xd">
+      <label for="xd">Date spent</label><input type="date" id="xd"><div class="dq"><button type="button" data-d="0">Today</button><button type="button" data-d="1">Yesterday</button></div>
       <p class="err" id="xe" role="alert"></p>
       <button class="pri" type="submit" id="xsub">Save Expense</button>
       <button type="button" id="xcx" hidden style="width:100%;margin-top:10px">Cancel editing</button>
@@ -293,6 +304,9 @@ button.pri{background:linear-gradient(135deg,#0f7a4b,#22a468);border:0;border-ra
 
 <section class="view" id="v-daily">
   <div id="dh"></div>
+  <div class="card" id="dx" hidden><h2>⬇ Save a copy</h2><p class="intro">Save or share the daily pledges with totals as a picture or a PDF.</p>
+    <label for="dsel">Which days?</label><select id="dsel"></select>
+    <div class="lb">Save to this device</div><div class="dgrid"><button type="button" class="pri" id="dimg">🖼 Image</button><button type="button" class="pri" id="dpdf">📄 PDF</button></div><div class="lb">Share with others</div><div class="dgrid sh"><button type="button" id="dsimg">📤 Image</button><button type="button" id="dspdf">📤 PDF</button></div></div>
   <div class="card"><h2>📅 Daily Record</h2><p class="intro">Every day’s pledges received and expenses paid. Tap a day to see the details.</p><div id="days"></div><div class="empty" id="de"><i>📅</i>Nothing recorded yet.</div></div>
 </section>
 
@@ -391,13 +405,13 @@ $("#xf").onsubmit=async e=>{e.preventDefault();const item=$("#xi").value.trim(),
 async function saveFile(fn,data){try{const dl=window.claude&&await claude.use("downloads");if(dl)await dl.save({filename:fn,data});else{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([data]));a.download=fn;a.click()}}catch(e){if(!e||e.code!=="declined")say("Save failed. Please try again.")}}
 $("#xl").onclick=()=>{const P=act("pledges").sort(byDate),X=act("expenses").sort(byDate);if(!P.length&&!X.length)return say("Nothing to save yet.");
  const wb=XLSX.utils.book_new(),add2=(n,s,w)=>{if(w)s["!cols"]=w.map(wch=>({wch}));XLSX.utils.book_append_sheet(wb,s,n)},tp=sum(P),tx=sum(X);
- add2("Summary",XLSX.utils.aoa_to_sheet([["Hakot Basura – San Antonio South HOA"],["Generated",new Date().toLocaleString("en-PH")],[],["Total pledged (PHP)",tp],["Total expenses (PHP)",tx],["Balance (PHP)",tp-tx]]),[28,22]);
+ add2("Summary",XLSX.utils.aoa_to_sheet([["Bayanihan – San Antonio South HOA"],["Generated",new Date().toLocaleString("en-PH")],[],["Total pledged (PHP)",tp],["Total expenses (PHP)",tx],["Balance (PHP)",tp-tx]]),[28,22]);
  add2("Pledges",XLSX.utils.json_to_sheet(P.map(p=>({Date:rd(p),Name:p.name,"Amount (PHP)":total(p),Method:p.method,Address:p.address||"N/A",Phase:p.phase?"Phase "+p.phase:"N/A"}))),[12,28,14,16,34,10]);
  add2("Expenses",XLSX.utils.json_to_sheet(X.map(p=>({Date:rd(p),Item:p.item,"Amount (PHP)":total(p)}))),[12,34,14]);
  const ks=[...new Set([...P,...X].map(rd))].sort().reverse();
  add2("Library",XLSX.utils.json_to_sheet(members().map(m=>({Name:m.name,Address:m.address||"N/A",Phase:m.phase?"Phase "+m.phase:"N/A","Usual amount (PHP)":m.amount||"",Method:m.method,Pledges:m.n,"Total pledged (PHP)":m.sum}))),[28,34,10,18,16,10,18]);
  add2("Daily",XLSX.utils.json_to_sheet(ks.map(k=>{const i=sum(P.filter(p=>rd(p)===k)),o=sum(X.filter(p=>rd(p)===k));return{Date:k,"Pledges in (PHP)":i,"Expenses out (PHP)":o,"Net (PHP)":i-o}})),[12,18,20,14]);
- saveFile("hakot-basura-records.xlsx",XLSX.write(wb,{bookType:"xlsx",type:"array"}))};
+ saveFile("bayanihan-records.xlsx",XLSX.write(wb,{bookType:"xlsx",type:"array"}))};
 $("#im").onclick=()=>$("#imf").click();
 $("#imf").onchange=async e=>{const f=e.target.files[0];e.target.value="";if(!f)return;
  try{const wb=XLSX.read(await f.arrayBuffer(),{type:"array"}),rows=n=>wb.Sheets[n]?XLSX.utils.sheet_to_json(wb.Sheets[n],{defval:""}):[],dt=v=>/^\d{4}-\d{2}-\d{2}$/.test(String(v))?String(v):today();
@@ -455,17 +469,17 @@ $("#lcx").onclick=resetL;$("#ls").addEventListener("input",e=>{lq=e.target.value
 
 // ===== Step-by-step guide =====
 const TS=[
-{i:"👋",t:"Welcome!",b:["This app records <b>pledges</b>, <b>expenses</b> and <b>daily collections</b> for San Antonio South HOA.","Use the <b>5 buttons at the bottom</b> to move between sections.","This short guide takes about one minute."]},
+{i:"👋",t:"Welcome!",b:["Welcome to <b>Bayanihan</b>: neighbors helping neighbors through voluntary pledges for San Antonio South HOA.","Record <b>pledges</b>, <b>expenses</b> and <b>daily collections</b> in one place.","Use the <b>5 buttons at the bottom</b> to move between sections.","This short guide takes about one minute."]},
 {i:"✍️",t:"Record a pledge",h:"pledges",g:"Take me to Pledges",b:["Type the person’s <b>full name</b>. It is the only detail you must type besides the amount.","Tap a <b>quick amount</b> (₱40, ₱100…) or type your own. The minimum is ₱40.","Choose <b>Cash, Bank or GCash</b>, check the date received, then tap <b>Save Pledge</b>."]},
 {i:"➕",t:"Optional details",h:"pledges",g:"Take me to Pledges",b:["Tap <b>＋ Add address, phase &amp; receipt</b> to open the extra fields.","Add the <b>complete address</b>, pick <b>Phase 1 or 2</b>, and attach a <b>photo of the receipt</b>.","Skip it when you don’t need it."]},
 {i:"📚",t:"The Library",h:"library",g:"Take me to the Library",b:["Save your regular pledgers once: <b>name, complete address, phase, usual amount and payment method</b>.","Tap <b>＋ Pledge</b> beside a name and the pledge form fills in for you.","Anyone you record a pledge for appears in the Library automatically. Use <b>Edit</b> to complete their details."]},
 {i:"🧾",t:"Record expenses",h:"expenses",g:"Take me to Expenses",b:["Type <b>what the money was for</b>, or tap Fuel, Driver’s pay, Repairs or Supplies.","Enter the <b>amount</b> and the <b>date</b>, then tap <b>Save Expense</b>."]},
-{i:"📅",t:"Daily record",h:"daily",g:"Take me to Daily",b:["Every day shows the <b>pledges received</b>, the <b>money spent</b> and the <b>net</b>.","Tap a day to see each pledge and that day’s <b>totals</b>."]},
+{i:"📅",t:"Daily record",h:"daily",g:"Take me to Daily",b:["Every day shows the <b>pledges received</b>, the <b>money spent</b> and the <b>net</b>.","Tap a day to see each pledge and that day’s <b>totals</b>.","Use <b>Image</b> or <b>PDF</b> to save the pledges with totals, or <b>Share</b> them with others. Today is picked automatically."]},
 {i:"📋",t:"Summary and Excel",h:"summary",g:"Take me to Summary",b:["The <b>balance</b> is all pledges received minus all expenses.","<b>Save to Excel</b> makes a report and a backup. <b>Load from Excel</b> brings saved records back."]},
 {i:"✨",t:"Handy tips",b:["Tap <b>Edit</b> to fix an entry. <b>Remove</b> asks you to tap twice, so nothing is deleted by accident.","<b>🔠 Text size</b> makes everything bigger. <b>🌙 Dark mode</b> is easier on the eyes at night.","On a phone, <b>swipe left or right</b> to change sections.","Open this guide again anytime with <b>❓ How to use</b>."]}];
 let ti=0;
 function tshow(i){ti=i;const s=TS[i];$("#tu").hidden=false;$("#tui").textContent=s.i;$("#tun").textContent=`Step ${i+1} of ${TS.length}`;$("#tut").textContent=s.t;$("#tux").innerHTML=s.b.map(x=>`<li>${x}</li>`).join("");$("#tugo").hidden=!s.h;if(s.h)$("#tugo").textContent=s.g+" →";
- $("#tubk").style.visibility=i?"visible":"hidden";$("#tunx").textContent=i===TS.length-1?"End":"Next →";$("#tud").innerHTML=TS.map((_,j)=>`<i class="${j===i?"on":""}"></i>`).join("");const c=$("#tus");c.classList.remove("sc");void c.offsetWidth;c.classList.add("sc")}
+ $("#tubk").style.visibility=i?"visible":"hidden";$("#tunx").textContent=i===TS.length-1?"Start using the app":"Next →";$("#tud").innerHTML=TS.map((_,j)=>`<i class="${j===i?"on":""}"></i>`).join("");const c=$("#tus");c.classList.remove("sc");void c.offsetWidth;c.classList.add("sc")}
 function tend(){$("#tu").hidden=true;try{localStorage.setItem("hb-tut","1")}catch(e){}}
 $("#help").onclick=()=>tshow(0);$("#tunx").onclick=()=>ti>=TS.length-1?tend():tshow(ti+1);$("#tubk").onclick=()=>tshow(ti-1);$("#tuskip").onclick=tend;$("#tugo").onclick=()=>{const t=TS[ti].h;tend();location.hash=t};
 addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#tu").hidden)tend()});
@@ -486,6 +500,46 @@ $("#name").addEventListener("keydown",e=>{if(dd.hidden)return;const bs=[...dd.qu
  if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();ddi=(ddi+(e.key==="ArrowDown"?1:-1)+bs.length)%bs.length;bs.forEach((b,i)=>b.classList.toggle("on",i===ddi));bs[ddi].scrollIntoView({block:"nearest"})}
  else if(e.key==="Enter"&&ddi>=0){e.preventDefault();pickM(dd._m[ddi])}else if(e.key==="Escape")ddHide()});
 $("#f").addEventListener("reset",ddHide);
+
+// ===== Download daily pledges as image / PDF =====
+const RW=1000,RPH=1414,C={g:"#146c43",dk:"#0a3a27",tx:"#1c211d",mu:"#5a665e",bn:"#e6f0ea",zb:"#f6f8f4"};
+const fnt=(w,s,f)=>`${w} ${s}px ${f||'"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif'}`,serif='Fraunces,Georgia,"Times New Roman",serif';
+function fitText(c,t,w){t=String(t);if(c.measureText(t).width<=w)return t;while(t.length>1&&c.measureText(t+"…").width>w)t=t.slice(0,-1);return t+"…"}
+function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
+function reportItems(P,logo,sel){const g={};P.forEach(p=>(g[rd(p)]=g[rd(p)]||[]).push(p));const ks=Object.keys(g).sort(),tot=sum(P),cash=sum(P.filter(p=>p.method==="Cash")),items=[],
+ sub=sel==="all"&&ks.length>1?nice(ks[0])+" – "+nice(ks[ks.length-1]):nice(ks[0]);
+ items.push({h:200,f:(c,y)=>{const gr=c.createLinearGradient(0,y,RW,y+200);gr.addColorStop(0,C.dk);gr.addColorStop(1,"#1f9a62");c.fillStyle=gr;c.fillRect(0,y,RW,200);
+  if(logo)c.drawImage(logo,50,y+50,92,92);c.fillStyle="#fff";c.textAlign="left";c.font=fnt(700,46,serif);c.fillText("Bayanihan",170,y+90);c.font=fnt(600,24);c.fillText("Daily Pledges · San Antonio South HOA",170,y+127);c.globalAlpha=.85;c.font=fnt(500,19);c.fillText(sub+"  ·  Generated "+nice(today()),170,y+160);c.globalAlpha=1}});
+ ks.forEach(k=>{const L=g[k].slice().sort((a,b)=>a.ts-b.ts);
+  items.push({h:76,keep:1,f:(c,y)=>{c.fillStyle=C.bn;rr(c,40,y+14,RW-80,56,14);c.fill();c.fillStyle=C.dk;c.textAlign="left";c.font=fnt(800,26);c.fillText(nice(k),64,y+51);c.textAlign="right";c.fillStyle=C.mu;c.font=fnt(600,20);c.fillText(L.length+" pledge"+(L.length>1?"s":""),RW-64,y+50)}});
+  L.forEach((p,i)=>items.push({h:58,f:(c,y)=>{if(i%2===0){c.fillStyle=C.zb;c.fillRect(40,y,RW-80,58)}c.fillStyle=C.tx;c.textAlign="left";c.font=fnt(700,22);c.fillText(fitText(c,p.name,440),64,y+37);c.fillStyle=C.mu;c.font=fnt(500,19);c.fillText(p.method,580,y+37);c.fillStyle=C.tx;c.textAlign="right";c.font=fnt(800,22);c.fillText(peso(total(p)),RW-64,y+37)}}));
+  items.push({h:100,f:(c,y)=>{c.strokeStyle=C.g;c.lineWidth=3;c.beginPath();c.moveTo(40,y+4);c.lineTo(RW-40,y+4);c.stroke();c.fillStyle=C.tx;c.textAlign="left";c.font=fnt(700,22);c.fillText("Total for "+nice(k).replace(/^\w+, /,""),64,y+50);c.fillStyle=C.g;c.textAlign="right";c.font=fnt(800,30);c.fillText(peso(sum(g[k])),RW-64,y+52)}})});
+ items.push({h:210,f:(c,y)=>{const gr=c.createLinearGradient(40,y,RW-40,y+170);gr.addColorStop(0,C.dk);gr.addColorStop(1,"#1f9a62");c.fillStyle=gr;rr(c,40,y+10,RW-80,170,26);c.fill();c.fillStyle="#fff";c.textAlign="left";c.globalAlpha=.85;c.font=fnt(700,20);c.fillText("GRAND TOTAL",74,y+56);c.globalAlpha=1;c.font=fnt(700,64,serif);c.fillText(peso(tot),74,y+128);
+  c.textAlign="right";c.font=fnt(600,20);c.fillText(P.length+" pledge"+(P.length>1?"s":"")+" · "+ks.length+" day"+(ks.length>1?"s":""),RW-74,y+80);c.globalAlpha=.9;c.fillText("Cash "+peso(cash)+" · Digital "+peso(tot-cash),RW-74,y+118);c.globalAlpha=1}});
+ return items}
+function paginate(items,ph){const pages=[];let cur=[],y=0;items.forEach((it,i)=>{const need=it.h+(it.keep&&items[i+1]?items[i+1].h:0);if(ph&&cur.length&&y+need>ph-80){pages.push(cur);cur=[];y=40}cur.push([it,y]);y+=it.h});pages.push(cur);return pages}
+function paint(entries,H,S,foot){const cv=document.createElement("canvas");cv.width=Math.round(RW*S);cv.height=Math.round(H*S);const c=cv.getContext("2d");c.scale(S,S);c.fillStyle="#fff";c.fillRect(0,0,RW,H);c.textBaseline="alphabetic";entries.forEach(([it,y])=>it.f(c,y));if(foot){c.fillStyle=C.mu;c.font=fnt(500,17);c.textAlign="center";c.fillText(foot,RW/2,H-34)}return cv}
+async function shareFile(name,type,buf,title){const f=new File([buf],name,{type});
+ if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title,text:title});return}catch(e){if(e&&e.name==="AbortError")return}}
+ say("Sharing is not available here, so the file was saved instead.");await saveFile(name,buf)}
+async function makeReport(kind,act2){const sel=$("#dsel").value,P=act("pledges").filter(p=>sel==="all"||rd(p)===sel);if(!P.length)return say(sel==="all"?"No pledges to save yet.":"No pledges on this day yet.");
+ if(kind==="pdf"&&!(window.jspdf&&window.jspdf.jsPDF))return say("The PDF tool did not load. Please check your internet and try again.");
+ say("Preparing your "+(kind==="pdf"?"PDF":"image")+"…");let out=null;
+ try{if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+  const logo=await new Promise(r=>{const i=new Image;i.onload=()=>r(i);i.onerror=()=>r(null);i.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'+document.querySelector("#logo").innerHTML+"</svg>")}),
+  items=reportItems(P,logo,sel),name="bayanihan-pledges-"+(sel==="all"?"all-days":sel);
+  if(kind==="img"){const H=items.reduce((s,i)=>s+i.h,0)+20,S=Math.min(2,Math.sqrt(12e6/(RW*H))),cv=paint(paginate(items,0)[0],H,S),blob=await new Promise(r=>cv.toBlob(r,"image/png"));
+   if(!blob)return say("The image was too large. Please try the PDF instead.");out=[name+".png","image/png",await blob.arrayBuffer()]}
+  else{const pg=paginate(items,RPH),doc=new window.jspdf.jsPDF({unit:"pt",format:"a4"}),W=doc.internal.pageSize.getWidth(),Hh=doc.internal.pageSize.getHeight();
+   pg.forEach((en,i)=>{if(i)doc.addPage();doc.addImage(paint(en,RPH,1.6,"Page "+(i+1)+" of "+pg.length).toDataURL("image/jpeg",.92),"JPEG",0,0,W,Hh)});out=[name+".pdf","application/pdf",doc.output("arraybuffer")]}
+  if(out){if(act2==="share")await shareFile(out[0],out[1],out[2],"Bayanihan pledges · "+(sel==="all"?"all days":nice(sel)));else await saveFile(out[0],out[2])}
+ }catch(e){say("Could not create the file. Please try again.")}}
+function fillSel(){const s=$("#dsel"),td=today(),ks=[...new Set(act("pledges").map(rd))].filter(k=>k!==td).sort().reverse(),v=s.dataset.u?s.value:td;
+ s.innerHTML=`<option value="${td}">Today · ${nice(td)}</option><option value="all">All days</option>`+ks.map(k=>`<option value="${k}">${nice(k)}</option>`).join("");s.value=[td,"all",...ks].includes(v)?v:td;$("#dx").hidden=!act("pledges").length}
+$("#dsel").addEventListener("change",()=>{$("#dsel").dataset.u=1});
+$("#dimg").onclick=()=>makeReport("img");$("#dpdf").onclick=()=>makeReport("pdf");$("#dsimg").onclick=()=>makeReport("img","share");$("#dspdf").onclick=()=>makeReport("pdf","share");
+{const _r4=render;render=function(){_r4();fillSel()}}
+document.querySelectorAll(".dq button").forEach(b=>b.onclick=()=>{const d=new Date();d.setDate(d.getDate()-(+b.dataset.d));b.closest(".dq").previousElementSibling.value=dk(d.getTime())});
 $("#rd").value=today();$("#xd").value=today();
 render();init();
 </script>
