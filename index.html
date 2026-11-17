@@ -465,7 +465,7 @@ const TS=[
 {i:"✨",t:"Handy tips",b:["Tap <b>Edit</b> to fix an entry. <b>Remove</b> asks you to tap twice, so nothing is deleted by accident.","<b>🔠 Text size</b> makes everything bigger. <b>🌙 Dark mode</b> is easier on the eyes at night.","On a phone, <b>swipe left or right</b> to change sections.","Open this guide again anytime with <b>❓ How to use</b>."]}];
 let ti=0;
 function tshow(i){ti=i;const s=TS[i];$("#tu").hidden=false;$("#tui").textContent=s.i;$("#tun").textContent=`Step ${i+1} of ${TS.length}`;$("#tut").textContent=s.t;$("#tux").innerHTML=s.b.map(x=>`<li>${x}</li>`).join("");$("#tugo").hidden=!s.h;if(s.h)$("#tugo").textContent=s.g+" →";
- $("#tubk").style.visibility=i?"visible":"hidden";$("#tunx").textContent=i===TS.length-1?"Start using the app":"Next →";$("#tud").innerHTML=TS.map((_,j)=>`<i class="${j===i?"on":""}"></i>`).join("");const c=$("#tus");c.classList.remove("sc");void c.offsetWidth;c.classList.add("sc")}
+ $("#tubk").style.visibility=i?"visible":"hidden";$("#tunx").textContent=i===TS.length-1?"End":"Next →";$("#tud").innerHTML=TS.map((_,j)=>`<i class="${j===i?"on":""}"></i>`).join("");const c=$("#tus");c.classList.remove("sc");void c.offsetWidth;c.classList.add("sc")}
 function tend(){$("#tu").hidden=true;try{localStorage.setItem("hb-tut","1")}catch(e){}}
 $("#help").onclick=()=>tshow(0);$("#tunx").onclick=()=>ti>=TS.length-1?tend():tshow(ti+1);$("#tubk").onclick=()=>tshow(ti-1);$("#tuskip").onclick=tend;$("#tugo").onclick=()=>{const t=TS[ti].h;tend();location.hash=t};
 addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#tu").hidden)tend()});
