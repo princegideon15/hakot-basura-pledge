@@ -131,6 +131,8 @@ main.v{display:block;max-width:820px;padding-top:16px}
 .stats{display:grid}
 /* ===== Premium layer ===== */
 html,body{overflow-x:clip;max-width:100%}
+nav#bn{grid-template-columns:repeat(5,1fr)}nav#bn .ind{width:calc((100% - 12px)/5)}nav#bn a{font-size:clamp(11px,.72rem,13px);padding:6px 0}
+.li .go{background:var(--ac);color:var(--acx);border-color:var(--ac);font-weight:800}.ls{margin:8px 0 10px}
 .dt{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0 4px;border-top:2px solid var(--bd);font-size:1.05rem;font-weight:700}.dt:first-of-type{margin-top:4px}.dt b{font-size:1.2rem}
 html{height:100%;overflow:hidden}
 body{height:100%;height:100dvh;overflow:hidden;display:flex;flex-direction:column;padding-bottom:0!important}
@@ -191,7 +193,7 @@ button.pri{background:linear-gradient(135deg,#0f7a4b,#22a468);border:0;border-ra
 <div class="road"><svg class="truck" viewBox="0 0 120 64" aria-hidden="true"><rect x="4" y="8" width="66" height="38" rx="7" fill="#f5b942"/><rect x="10" y="14" width="54" height="5" rx="2.500" fill="#fff" opacity=".55"/><path d="M74 20h22l16 16v14H74z" fill="#fff"/><path d="M80 25h14l9 10H80z" fill="#9fd8ef"/><rect x="4" y="46" width="108" height="6" rx="3" fill="#0b3f27"/><g class="wh"><circle cx="30" cy="54" r="9" fill="#222"/><circle cx="30" cy="54" r="4" fill="#ccc"/><path d="M30 46v16M22 54h16" stroke="#777" stroke-width="2"/></g><g class="wh"><circle cx="92" cy="54" r="9" fill="#222"/><circle cx="92" cy="54" r="4" fill="#ccc"/><path d="M92 46v16M84 54h16" stroke="#777" stroke-width="2"/></g></svg></div>
 <div class="bar"><i></i></div><small>Getting things ready…</small></div>
 <div id="ok" role="alert"><div class="okc"><svg viewBox="0 0 120 120"><circle class="c" cx="60" cy="60" r="48"/><path class="k" d="M38 62l16 16 30-34"/></svg><h2 id="oh">Salamat po!</h2><p id="op">Saved.</p></div></div>
-<nav id="bn" aria-label="Go to section"><span class="ind"></span><a href="#pledges" class=on><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.500-7-10a4 4 0 0 1 7-2.600A4 4 0 0 1 19 11c0 5.500-7 10-7 10z"/></svg>Pledges</a><a href="#expenses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>Expenses</a><a href="#daily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>Daily</a><a href="#summary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>Summary</a></nav>
+<nav id="bn" aria-label="Go to section"><span class="ind"></span><a href="#pledges" class=on><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.500-7-10a4 4 0 0 1 7-2.600A4 4 0 0 1 19 11c0 5.500-7 10-7 10z"/></svg>Pledges</a><a href="#library"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h13a1 1 0 0 1 1 1v14H6a1 1 0 0 0-1 1z"/><path d="M5 4v16M9 8h6"/></svg>Library</a><a href="#expenses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>Expenses</a><a href="#daily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>Daily</a><a href="#summary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>Summary</a></nav>
 <div id="app">
 <header id="top"><a class="brand" href="#top" aria-label="Hakot Basura home"><svg class="lg"><use href="#logo"/></svg><div><h1>Hakot Basura</h1><small>Pledges · San Antonio South HOA<br>Brgy. Langkiwa, Biñan, Laguna</small></div></a>
   <div class="hb"><button id="tsz" type="button" aria-label="Change text size">🔠 Text size</button><button id="theme" aria-label="Toggle light or dark mode">🌙 Dark mode</button></div></header>
@@ -228,6 +230,37 @@ button.pri{background:linear-gradient(135deg,#0f7a4b,#22a468);border:0;border-ra
     </form>
   </div>
   <div class="card"><h2>Pledges received</h2><div id="pl"></div><div class="empty" id="pe"><i>🌱</i>No pledges yet.<br>Your first pledge will appear here.</div></div>
+</section>
+
+<section class="view" id="v-library">
+  <div class="card"><h2 id="lt">📚 Add to Library</h2><p class="intro">Save a name with their usual details. Later, tap “＋ Pledge” beside a name to record a pledge in one step.</p>
+    <form id="lf" novalidate>
+      <label for="ln">Full name</label><input type="text" id="ln" autocomplete="off" placeholder="Juan Dela Cruz">
+      <label for="la">Complete address</label><input type="text" id="la" autocomplete="off" placeholder="Blk 5 Lot 12, Phase 2">
+      <div class="lb">Phase</div>
+      <div class="opts" role="radiogroup" aria-label="Library phase">
+        <label class="opt"><input type="radio" name="lph" value="" checked>N/A</label>
+        <label class="opt"><input type="radio" name="lph" value="1"><span class="sw" style="background:var(--p1)"></span>Phase 1</label>
+        <label class="opt"><input type="radio" name="lph" value="2"><span class="sw" style="background:var(--p2)"></span>Phase 2</label>
+      </div>
+      <label for="lm">Usual pledge amount (₱) — optional</label>
+      <div class="money"><span>₱</span><input type="number" id="lm" inputmode="numeric" min="40" step="1" placeholder="Minimum 40"></div>
+      <div class="lb">Usual payment method</div>
+      <div class="opts" role="radiogroup" aria-label="Library payment method">
+        <label class="opt"><input type="radio" name="lmt" value="Cash" checked>Cash</label>
+        <label class="opt"><input type="radio" name="lmt" value="Bank transfer">Bank</label>
+        <label class="opt"><input type="radio" name="lmt" value="GCash">GCash</label>
+      </div>
+      <p class="err" id="le2" role="alert"></p>
+      <button class="pri" type="submit" id="lsub">✔ Save to Library</button>
+      <button type="button" id="lcx" hidden style="width:100%;margin-top:10px">Cancel editing</button>
+    </form>
+  </div>
+  <div class="card"><h2>Pledgers</h2><p class="intro" id="lc"></p>
+    <input type="text" id="ls" class="ls" placeholder="🔍 Search name or address" autocomplete="off">
+    <div id="ll"></div>
+    <div class="empty" id="le"><i>📚</i>No one found.<br>Add a name above, or save a pledge and it appears here automatically.</div>
+  </div>
 </section>
 
 <section class="view" id="v-expenses">
@@ -269,7 +302,7 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;"
 const dk=ts=>{const d=new Date(ts);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")},today=()=>dk(Date.now()),rd=p=>p.rd||dk(p.ts);
 const nice=k=>new Date(k+"T00:00:00").toLocaleDateString("en-PH",{weekday:"short",month:"short",day:"numeric",year:"numeric"});
 const total=p=>Number(p.amount)*((p.months&&p.months.length)||1);
-const D={pledges:[],expenses:[]},act=c=>D[c].filter(p=>!p.archived),sum=a=>a.reduce((s,p)=>s+total(p),0);
+const D={pledges:[],expenses:[],library:[]},act=c=>D[c].filter(p=>!p.archived),sum=a=>a.reduce((s,p)=>s+total(p),0);
 let db=null,eP=null,eX=null,receipt="";
 // Theme + text size
 const root=document.documentElement;
@@ -282,14 +315,14 @@ $("#tsz").onclick=()=>{s=(s+1)%3;root.dataset.tsz=s;try{localStorage.setItem("hb
 function say(m){const t=$("#toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),3000)}
 function celebrate(h,p){burst();$("#oh").textContent=h;$("#op").textContent=p;const o=$("#ok");o.classList.remove("on");void o.offsetWidth;o.classList.add("on");const x=()=>o.classList.remove("on");o.onclick=x;setTimeout(x,2600)}
 // Views
-function view(){const h=location.hash.slice(1),v=["pledges","expenses","daily","summary"].includes(h)?h:"pledges";
+function view(){const h=location.hash.slice(1),v=["pledges","library","expenses","daily","summary"].includes(h)?h:"pledges";
  document.querySelectorAll(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));
  document.querySelectorAll("#bn a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+v));$("#app").scrollTo({top:0});tabFx(v)}
 addEventListener("hashchange",view);view();
 // Storage
 const persist=c=>{try{localStorage.setItem("hb-"+c,JSON.stringify(D[c]))}catch(e){say("Saved for this session only (storage is full).")}};
 async function init(){try{if(window.claude)db=await claude.use("db")}catch(e){db=null}
- for(const c of["pledges","expenses"]){if(db)db.collection(c).onSnapshot(s=>{D[c]=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);render()},()=>{});else{try{D[c]=JSON.parse(localStorage.getItem("hb-"+c)||"[]")}catch(e){}}}
+ for(const c of["pledges","expenses","library"]){if(db)db.collection(c).onSnapshot(s=>{D[c]=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);render()},()=>{});else{try{D[c]=JSON.parse(localStorage.getItem("hb-"+c)||"[]")}catch(e){}}}
  render()}
 async function add(c,o){if(db)await db.collection(c).add(o);else{o.id="l"+Date.now()+Math.random().toString(36).slice(2,6);D[c].push(o);persist(c);render()}}
 async function patch(c,id,f){try{if(db)await db.collection(c).doc(id).update(f);else{Object.assign(D[c].find(x=>x.id===id),f);persist(c);render()}return true}catch(e){say("Could not save changes.");return false}}
@@ -309,7 +342,7 @@ function render(){const P=act("pledges").sort(byDate),X=act("expenses").sort(byD
  const g={};P.forEach(p=>(g[rd(p)]=g[rd(p)]||{p:[],x:[]}).p.push(p));X.forEach(p=>(g[rd(p)]=g[rd(p)]||{p:[],x:[]}).x.push(p));
  const ks=Object.keys(g).sort().reverse();$("#de").hidden=!!ks.length;$("#dh").innerHTML=ks.length?hero("Total pledges · all days","dp",tp,"",[["Days recorded",ks.length,0],["Total spent",tx,1]]):"";
  $("#days").innerHTML=ks.map((k,i)=>{const a=g[k],i1=sum(a.p),o1=sum(a.x);return `<details class="day" data-k="${k}"${(openD.size?openD.has(k):i===0)?" open":""}><summary><b>${nice(k)}${k===td?" · Today":""}</b><span class="in">Pledges ${peso(i1)}</span><span class="out">Spent ${peso(o1)}</span><b>Net ${peso(i1-o1)}</b><div class="split"><i style="width:${i1+o1?Math.round(i1/(i1+o1)*100):0}%"></i></div></summary><div class="dl">${a.p.map(p=>`<div class="dr"><span>${esc(p.name)} <small class="hint">${esc(p.method)}</small></span><span class="in">+ ${peso(total(p))}</span></div>`).join("")}${a.x.map(p=>`<div class="dr"><span>${esc(p.item)}</span><span class="out">− ${peso(total(p))}</span></div>`).join("")}<div class="dt"><span>Total pledges (${a.p.length})</span><b class="in">${peso(i1)}</b></div>${a.x.length?`<div class="dt"><span>Total spent</span><b class="out">${peso(o1)}</b></div><div class="dt"><span>Net for the day</span><b>${peso(i1-o1)}</b></div>`:""}</div></details>`}).join("");
- const m=new Map;D.pledges.forEach(p=>{const k=(p.name||"").trim().toLowerCase();if(k&&(!m.get(k)||p.ts>=m.get(k).ts))m.set(k,p)});$("#libl").innerHTML=[...m.values()].sort((a,b)=>a.name.localeCompare(b.name)).map(p=>`<option value="${esc(p.name)}">`).join("")}
+ $("#libl").innerHTML=members().map(m=>`<option value="${esc(m.name)}">`).join("");renderLib()}
 // Actions
 let arm=null;
 document.addEventListener("click",e=>{const b=e.target.closest("button[data-id]");if(!b)return;const{id,c,a}=b.dataset;
@@ -324,8 +357,8 @@ function editP(id){const p=D.pledges.find(x=>x.id===id);if(!p)return;resetP();eP
 $("#cx").onclick=resetP;
 function shrink(f,cb){const img=new Image,u=URL.createObjectURL(f);img.onload=()=>{const s=Math.min(1,700/Math.max(img.width,img.height)),c=document.createElement("canvas");c.width=img.width*s;c.height=img.height*s;c.getContext("2d").drawImage(img,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",.6));URL.revokeObjectURL(u)};img.onerror=()=>say("That file is not a readable image.");img.src=u}
 $("#file").onchange=e=>{const f=e.target.files[0];if(f)shrink(f,d=>{receipt=d;$("#prev").src=d;$("#prev").style.display="block"})};
-$("#name").addEventListener("change",e=>{const k=e.target.value.trim().toLowerCase(),p=D.pledges.filter(x=>(x.name||"").trim().toLowerCase()===k).pop();if(!p||eP||$("#amt").value)return;
- $("#amt").value=p.amount;setR("method",p.method);$("#addr").value=p.address||"";setR("phase",p.phase||"");if(p.address||p.phase){$("#opt").hidden=false;$("#more").textContent="− Hide optional details"}say("Loaded "+p.name+"’s last pledge.")});
+$("#name").addEventListener("change",e=>{const k=e.target.value.trim().toLowerCase(),p=members().find(x=>x.key===k);if(!p||eP||$("#amt").value)return;
+ $("#amt").value=p.amount;setR("method",p.method);$("#addr").value=p.address||"";setR("phase",p.phase||"");if(p.address||p.phase){$("#opt").hidden=false;$("#more").textContent="− Hide optional details"}say("Loaded "+p.name+"’s details from the library.")});
 $("#f").onsubmit=async e=>{e.preventDefault();const name=$("#name").value.trim(),amount=Number($("#amt").value),er=m=>{$("#err").textContent=m};
  if(!name)return er("Please type the full name.");if(!(amount>=40))return er("Minimum pledge is ₱40.");
  const f={name,amount,method:document.querySelector("input[name=method]:checked").value,address:$("#addr").value.trim(),phase:document.querySelector("input[name=phase]:checked").value,rd:$("#rd").value||today(),receipt};
@@ -348,6 +381,7 @@ $("#xl").onclick=()=>{const P=act("pledges").sort(byDate),X=act("expenses").sort
  add2("Pledges",XLSX.utils.json_to_sheet(P.map(p=>({Date:rd(p),Name:p.name,"Amount (PHP)":total(p),Method:p.method,Address:p.address||"N/A",Phase:p.phase?"Phase "+p.phase:"N/A"}))),[12,28,14,16,34,10]);
  add2("Expenses",XLSX.utils.json_to_sheet(X.map(p=>({Date:rd(p),Item:p.item,"Amount (PHP)":total(p)}))),[12,34,14]);
  const ks=[...new Set([...P,...X].map(rd))].sort().reverse();
+ add2("Library",XLSX.utils.json_to_sheet(members().map(m=>({Name:m.name,Address:m.address||"N/A",Phase:m.phase?"Phase "+m.phase:"N/A","Usual amount (PHP)":m.amount||"",Method:m.method,Pledges:m.n,"Total pledged (PHP)":m.sum}))),[28,34,10,18,16,10,18]);
  add2("Daily",XLSX.utils.json_to_sheet(ks.map(k=>{const i=sum(P.filter(p=>rd(p)===k)),o=sum(X.filter(p=>rd(p)===k));return{Date:k,"Pledges in (PHP)":i,"Expenses out (PHP)":o,"Net (PHP)":i-o}})),[12,18,20,14]);
  saveFile("hakot-basura-records.xlsx",XLSX.write(wb,{bookType:"xlsx",type:"array"}))};
 $("#im").onclick=()=>$("#imf").click();
@@ -372,12 +406,38 @@ function qm(){document.querySelectorAll("#qa button").forEach(b=>b.classList.tog
 const _r=render;render=function(){_r();animateAll();qm()};
 document.querySelectorAll("#qa button").forEach(b=>b.onclick=()=>{$("#amt").value=b.dataset.q;qm()});$("#amt").addEventListener("input",qm);$("#f").addEventListener("reset",()=>setTimeout(qm));
 document.querySelectorAll("#xq button").forEach(b=>b.onclick=()=>{$("#xi").value=b.dataset.q;$("#xa").focus()});
-var prevTab;function tabFx(v){const i=["pledges","expenses","daily","summary"].indexOf(v),el=document.querySelector(".view.on");if(el)el.style.setProperty("--dx",(i>=(prevTab||0)?30:-30)+"px");prevTab=i;$("#bn").style.setProperty("--i",i)}
+var prevTab;function tabFx(v){const i=["pledges","library","expenses","daily","summary"].indexOf(v),el=document.querySelector(".view.on");if(el)el.style.setProperty("--dx",(i>=(prevTab||0)?30:-30)+"px");prevTab=i;$("#bn").style.setProperty("--i",i)}
 function burst(){const c=document.querySelector(".okc");c.querySelectorAll(".cf").forEach(n=>n.remove());const cols=["#f5b942","#1f9a62","#2f7bd6","#e0573d","#e9e6da"];for(let i=0;i<34;i++){const s=document.createElement("i"),a=Math.random()*6.283,d=90+Math.random()*160;s.className="cf";s.style.cssText=`--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d-50}px;--r:${Math.random()*720-360}deg;background:${cols[i%5]};animation-delay:${Math.random()*.15}s`;c.appendChild(s)}setTimeout(()=>c.querySelectorAll(".cf").forEach(n=>n.remove()),1700)}
 document.addEventListener("pointerdown",e=>{const b=e.target.closest("button");if(!b||b.disabled)return;const r=b.getBoundingClientRect(),d=Math.max(r.width,r.height)*2,s=document.createElement("span");s.className="rp";s.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;b.appendChild(s);setTimeout(()=>s.remove(),620)});
-{let sx=0,sy=0;const T=["pledges","expenses","daily","summary"];document.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
-document.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)<90||Math.abs(dx)<Math.abs(dy)*2||e.target.closest("input,select,dialog"))return;const n=T.indexOf(location.hash.slice(1)||"pledges")+(dx<0?1:-1);if(n>=0&&n<4)location.hash=T[n]},{passive:true})}
+{let sx=0,sy=0;const T=["pledges","library","expenses","daily","summary"];document.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+document.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)<90||Math.abs(dx)<Math.abs(dy)*2||e.target.closest("input,select,dialog"))return;const n=T.indexOf(location.hash.slice(1)||"pledges")+(dx<0?1:-1);if(n>=0&&n<5)location.hash=T[n]},{passive:true})}
 tabFx(location.hash.slice(1)||"pledges");
+
+// ===== Library =====
+const nk=s=>String(s||"").trim().toLowerCase();let eLk=null,lq="";
+function members(){const m=new Map;
+ D.pledges.filter(p=>!p.archived).forEach(p=>{const k=nk(p.name);if(!k)return;const o=m.get(k)||{key:k,name:p.name,n:0,sum:0};o.n++;o.sum+=total(p);if(!o.last||p.ts>=o.last.ts)o.last=p;m.set(k,o)});
+ act("library").forEach(l=>{const k=nk(l.name);if(!k)return;const o=m.get(k)||{key:k,n:0,sum:0};o.name=l.name;o.lib=l;m.set(k,o)});
+ return[...m.values()].map(o=>{const l=o.lib||{},p=o.last||{};return{...o,address:l.address||p.address||"",phase:l.phase||p.phase||"",amount:l.amount||p.amount||"",method:l.method||p.method||"Cash"}}).sort((a,b)=>a.name.localeCompare(b.name))}
+function renderLib(){const all=members(),q=nk(lq),M=all.filter(m=>!q||nk(m.name).includes(q)||nk(m.address).includes(q));
+ $("#lc").textContent=all.length+" pledger"+(all.length===1?"":"s")+" in the library";
+ $("#ll").innerHTML=M.map((m,i)=>`<div class="li" style="animation-delay:${Math.min(i,10)*40}ms"><div class="av" style="--h:${hue(m.name)}">${esc(m.name.trim().charAt(0).toUpperCase())}</div><div><div class="nm">${esc(m.name)}</div><div class="s2">${[m.address?esc(m.address):"No address",m.phase?"Phase "+m.phase:"No phase",m.amount?"Usual "+peso(m.amount):"",esc(m.method)].filter(Boolean).join(" · ")}<br>${m.n?m.n+" pledge"+(m.n===1?"":"s")+" · "+peso(m.sum)+" total":"No pledges yet"}</div></div><span class="ab"><button type="button" class="sm go" data-lk="${esc(m.key)}" data-la="use">＋ Pledge</button><button type="button" class="sm" data-lk="${esc(m.key)}" data-la="edit">Edit</button>${m.lib?`<button type="button" class="sm" data-lk="${esc(m.key)}" data-la="del">Remove</button>`:""}</span></div>`).join("");
+ $("#le").hidden=!!M.length}
+function useM(m){resetP();location.hash="pledges";$("#name").value=m.name;if(m.amount)$("#amt").value=m.amount;setR("method",m.method);$("#addr").value=m.address||"";setR("phase",m.phase||"");
+ if(m.address||m.phase){$("#opt").hidden=false;$("#more").textContent="− Hide optional details"}qm();say(m.name+" is ready. Check the amount, then save.")}
+function resetL(){$("#lf").reset();eLk=null;$("#lt").textContent="📚 Add to Library";$("#lsub").textContent="✔ Save to Library";$("#lcx").hidden=true;$("#le2").textContent=""}
+function editL(m){resetL();eLk=m;$("#ln").value=m.name;$("#la").value=m.address||"";setR("lph",m.phase||"");$("#lm").value=m.amount||"";setR("lmt",m.method);$("#lt").textContent="✏️ Edit "+m.name;$("#lsub").textContent="✔ Save Changes";$("#lcx").hidden=false;$("#app").scrollTo({top:0})}
+document.addEventListener("click",e=>{const b=e.target.closest("button[data-lk]");if(!b)return;const k=b.dataset.lk,a=b.dataset.la,m=members().find(x=>x.key===k);if(!m)return;
+ if(a==="use")return useM(m);if(a==="edit")return editL(m);
+ if(arm!==k){arm=k;b.textContent="Tap again to confirm";setTimeout(()=>{if(arm===k){arm=null;b.textContent="Remove"}},3500);return}
+ arm=null;patch("library",m.lib.id,{archived:true}).then(ok=>ok&&say("Removed from the library."))});
+$("#lf").onsubmit=async e=>{e.preventDefault();const name=$("#ln").value.trim(),amount=$("#lm").value?Number($("#lm").value):"",er=m=>{$("#le2").textContent=m};
+ if(!name)return er("Please type the full name.");if(amount!==""&&!(amount>=40))return er("Minimum pledge is ₱40.");
+ const f={name,address:$("#la").value.trim(),phase:document.querySelector("input[name=lph]:checked").value,amount,method:document.querySelector("input[name=lmt]:checked").value};
+ if(act("library").find(x=>nk(x.name)===nk(name)&&(!eLk||!eLk.lib||x.id!==eLk.lib.id)))return er("This name is already in the library. Tap Edit beside it instead.");
+ try{if(eLk&&eLk.lib){if(!await patch("library",eLk.lib.id,f))return}else await add("library",{...f,ts:Date.now()})}catch(x){return er("Could not save. Please try again.")}
+ const was=!!eLk;resetL();celebrate(was?"Updated!":"Saved!",was?"Library details updated.":"Added to the library.")};
+$("#lcx").onclick=resetL;$("#ls").addEventListener("input",e=>{lq=e.target.value;renderLib()});
 $("#rd").value=today();$("#xd").value=today();
 render();init();
 </script>
