@@ -130,6 +130,9 @@ main.v{display:block;max-width:820px;padding-top:16px}
 .day summary>span{font-size:.9rem}.in{color:var(--ac);font-weight:800}.out{color:var(--err);font-weight:800}
 .stats{display:grid}
 /* ===== Premium layer ===== */
+html,body{overflow-x:clip;max-width:100%}
+main.v{overflow-x:clip;overflow-y:visible}
+#bn{position:fixed!important;bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;transform:translateZ(0);will-change:transform;z-index:50}
 :root{--bg:#f4f1e8;--bd:#d9ddd2;--sh:0 14px 34px -16px rgba(20,60,40,.35)}
 :root[data-theme="dark"]{--bg:#0b120d;--card:#16201a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b120d;--card:#16201a}}
