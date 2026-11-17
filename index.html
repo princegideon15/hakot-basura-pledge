@@ -40,7 +40,7 @@ input:focus-visible,button:focus-visible,.opt:focus-within,summary:focus-visible
 .opt{border:2px solid var(--bd);border-radius:14px;padding:12px 14px;cursor:pointer;display:flex;gap:10px;align-items:center;min-height:60px;font-weight:600;margin:0;transition:transform .15s,border-color .2s,background .2s}
 .opt:active{transform:scale(.97)}
 .opt:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 14%,transparent)}
-.opt:has(input:checked)::after{content:"✔";margin-left:auto;color:var(--ac);font-weight:800;animation:pop .3s}
+.opt:has(input:checked){box-shadow:0 0 0 2px var(--ac) inset;font-weight:800}
 .opt input{accent-color:var(--ac);width:24px;height:24px;flex:none;margin:0}
 .sw{width:16px;height:16px;border-radius:50%;display:inline-block}
 button{font:inherit;font-weight:600;cursor:pointer;border-radius:14px;border:2px solid var(--bd);background:var(--card);color:var(--tx);padding:12px 18px;min-height:54px;transition:transform .15s,box-shadow .2s,background .2s}
@@ -131,6 +131,19 @@ main.v{display:block;max-width:820px;padding-top:16px}
 .stats{display:grid}
 /* ===== Premium layer ===== */
 html,body{overflow-x:clip;max-width:100%}
+.ddw{position:relative}.dd{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:25;background:var(--card);border:2px solid var(--ac);border-radius:18px;box-shadow:0 18px 36px -12px rgba(0,0,0,.4);max-height:min(290px,42vh);overflow-y:auto;animation:up .2s;-webkit-overflow-scrolling:touch}
+.dd button{display:flex;width:100%;text-align:left;gap:12px;align-items:center;border:0;border-radius:0;padding:10px 14px;min-height:64px;background:none;font-weight:500;line-height:1.35}.dd button+button{border-top:1px solid var(--bd)}
+.dd button:hover,.dd button.on{background:color-mix(in srgb,var(--ac) 12%,transparent)}.dd .av{width:40px;height:40px;border-radius:14px;font-size:1.05rem}.dd b{font-size:1.05rem}.dd small{color:var(--mut);font-size:.85rem}
+
+#tu{position:fixed;inset:0;z-index:80;background:rgba(8,30,20,.74);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:16px;animation:fade .3s}
+.tuc{background:var(--card);color:var(--tx);border-radius:28px;padding:22px 20px 12px;width:min(480px,100%);max-height:calc(100dvh - 32px);overflow:auto;text-align:center;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);animation:pop .4s}
+.tui{font-size:4rem;line-height:1.1;animation:bnc 2.2s ease-in-out infinite}
+.tun{color:var(--mut);font-weight:800;font-size:.85rem;letter-spacing:.5px;text-transform:uppercase;margin-top:6px}
+.tuc h2{margin:4px 0 10px;font-size:1.55rem}.tul{margin:0 0 12px;padding-left:22px;text-align:left;line-height:1.55;font-size:1.05rem}.tul li{margin:8px 0}
+.sc{animation:up .35s}.tgo{width:100%;margin:2px 0 14px;background:color-mix(in srgb,var(--ac) 10%,transparent);border-color:var(--ac);color:var(--ac);font-weight:800}
+.tub{display:flex;align-items:center;justify-content:space-between;gap:8px}.dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}.dots i{width:9px;height:9px;border-radius:9px;background:var(--bd);transition:all .3s}.dots i.on{width:24px;background:var(--ac)}
+.tnx2{background:linear-gradient(135deg,#0f7a4b,#22a468);color:#fff;border:0;font-weight:800}
+.tul{font-weight:500}.tul b{font-weight:800}.tub button{white-space:nowrap;padding:10px 14px}.dots{gap:5px;flex-wrap:nowrap}.dots i{width:8px;height:8px}.dots i.on{width:20px}
 nav#bn{grid-template-columns:repeat(5,1fr)}nav#bn .ind{width:calc((100% - 12px)/5)}nav#bn a{font-size:clamp(11px,.72rem,13px);padding:6px 0}
 .li .go{background:var(--ac);color:var(--acx);border-color:var(--ac);font-weight:800}.ls{margin:8px 0 10px}
 .dt{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0 4px;border-top:2px solid var(--bd);font-size:1.05rem;font-weight:700}.dt:first-of-type{margin-top:4px}.dt b{font-size:1.2rem}
@@ -196,7 +209,7 @@ button.pri{background:linear-gradient(135deg,#0f7a4b,#22a468);border:0;border-ra
 <nav id="bn" aria-label="Go to section"><span class="ind"></span><a href="#pledges" class=on><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.500-7-10a4 4 0 0 1 7-2.600A4 4 0 0 1 19 11c0 5.500-7 10-7 10z"/></svg>Pledges</a><a href="#library"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h13a1 1 0 0 1 1 1v14H6a1 1 0 0 0-1 1z"/><path d="M5 4v16M9 8h6"/></svg>Library</a><a href="#expenses"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>Expenses</a><a href="#daily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>Daily</a><a href="#summary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>Summary</a></nav>
 <div id="app">
 <header id="top"><a class="brand" href="#top" aria-label="Hakot Basura home"><svg class="lg"><use href="#logo"/></svg><div><h1>Hakot Basura</h1><small>Pledges · San Antonio South HOA<br>Brgy. Langkiwa, Biñan, Laguna</small></div></a>
-  <div class="hb"><button id="tsz" type="button" aria-label="Change text size">🔠 Text size</button><button id="theme" aria-label="Toggle light or dark mode">🌙 Dark mode</button></div></header>
+  <div class="hb"><button id="help" type="button" aria-label="Open the step-by-step guide">❓ How to use</button><button id="tsz" type="button" aria-label="Change text size">🔠 Text size</button><button id="theme" aria-label="Toggle light or dark mode">🌙 Dark mode</button></div></header>
 <main class="v">
 <section class="view on" id="v-pledges">
   <div id="ps"></div>
@@ -225,7 +238,7 @@ button.pri{background:linear-gradient(135deg,#0f7a4b,#22a468);border:0;border-ra
         <label for="file">Photo of receipt</label><input type="file" id="file" accept="image/*"><img id="prev" alt="Receipt preview">
       </div>
       <p class="err" id="err" role="alert"></p>
-      <button class="pri" type="submit" id="sub">✔ Save Pledge</button>
+      <button class="pri" type="submit" id="sub">Save Pledge</button>
       <button type="button" id="cx" hidden style="width:100%;margin-top:10px">Cancel editing</button>
     </form>
   </div>
@@ -252,7 +265,7 @@ button.pri{background:linear-gradient(135deg,#0f7a4b,#22a468);border:0;border-ra
         <label class="opt"><input type="radio" name="lmt" value="GCash">GCash</label>
       </div>
       <p class="err" id="le2" role="alert"></p>
-      <button class="pri" type="submit" id="lsub">✔ Save to Library</button>
+      <button class="pri" type="submit" id="lsub">Save to Library</button>
       <button type="button" id="lcx" hidden style="width:100%;margin-top:10px">Cancel editing</button>
     </form>
   </div>
@@ -271,7 +284,7 @@ button.pri{background:linear-gradient(135deg,#0f7a4b,#22a468);border:0;border-ra
       <label for="xa">Amount spent (₱)</label><div class="money"><span>₱</span><input type="number" id="xa" inputmode="decimal" min="1" step="any" placeholder="0"></div>
       <label for="xd">Date spent</label><input type="date" id="xd">
       <p class="err" id="xe" role="alert"></p>
-      <button class="pri" type="submit" id="xsub">✔ Save Expense</button>
+      <button class="pri" type="submit" id="xsub">Save Expense</button>
       <button type="button" id="xcx" hidden style="width:100%;margin-top:10px">Cancel editing</button>
     </form>
   </div>
@@ -290,6 +303,7 @@ button.pri{background:linear-gradient(135deg,#0f7a4b,#22a468);border:0;border-ra
 </section>
 </main>
 </div>
+<div id="tu" hidden role="dialog" aria-modal="true" aria-labelledby="tut"><div class="tuc"><div id="tus"><div class="tui" id="tui"></div><div class="tun" id="tun"></div><h2 id="tut"></h2><ul class="tul" id="tux"></ul><button type="button" class="tgo" id="tugo"></button></div><div class="tub"><button type="button" id="tubk">← Back</button><span class="dots" id="tud"></span><button type="button" class="tnx2" id="tunx">Next →</button></div><button type="button" class="tl" id="tuskip">Skip the guide</button></div></div>
 <div id="toast" role="status"></div>
 <script>
 (function(){var t0=Date.now(),done=false;function go(){if(done)return;done=true;var l=document.getElementById("ld");l.classList.add("out");document.body.classList.add("go");setTimeout(function(){l.remove()},800)}
@@ -351,9 +365,9 @@ document.addEventListener("click",e=>{const b=e.target.closest("button[data-id]"
  arm=null;patch(c,id,{archived:true}).then(ok=>ok&&say("Removed."))});
 const setR=(n,v)=>{const r=document.querySelector(`input[name=${n}][value="${v}"]`);if(r)r.checked=true};
 $("#more").onclick=()=>{const o=$("#opt");o.hidden=!o.hidden;$("#more").textContent=o.hidden?"＋ Add address, phase & receipt (optional)":"− Hide optional details"};
-function resetP(){$("#f").reset();$("#rd").value=today();receipt="";eP=null;$("#prev").style.display="none";$("#opt").hidden=true;$("#more").textContent="＋ Add address, phase & receipt (optional)";$("#pt").textContent="✍️ New Pledge";$("#sub").textContent="✔ Save Pledge";$("#cx").hidden=true;$("#err").textContent=""}
+function resetP(){$("#f").reset();$("#rd").value=today();receipt="";eP=null;$("#prev").style.display="none";$("#opt").hidden=true;$("#more").textContent="＋ Add address, phase & receipt (optional)";$("#pt").textContent="✍️ New Pledge";$("#sub").textContent="Save Pledge";$("#cx").hidden=true;$("#err").textContent=""}
 function editP(id){const p=D.pledges.find(x=>x.id===id);if(!p)return;resetP();eP=id;receipt=p.receipt||"";$("#name").value=p.name;$("#amt").value=p.amount;setR("method",p.method);$("#rd").value=rd(p);$("#addr").value=p.address||"";setR("phase",p.phase||"");
- if(p.address||p.phase||p.receipt){$("#opt").hidden=false;$("#more").textContent="− Hide optional details"}$("#pt").textContent="✏️ Edit Pledge";$("#sub").textContent="✔ Save Changes";$("#cx").hidden=false;$("#app").scrollTo({top:0})}
+ if(p.address||p.phase||p.receipt){$("#opt").hidden=false;$("#more").textContent="− Hide optional details"}$("#pt").textContent="✏️ Edit Pledge";$("#sub").textContent="Save Changes";$("#cx").hidden=false;$("#app").scrollTo({top:0})}
 $("#cx").onclick=resetP;
 function shrink(f,cb){const img=new Image,u=URL.createObjectURL(f);img.onload=()=>{const s=Math.min(1,700/Math.max(img.width,img.height)),c=document.createElement("canvas");c.width=img.width*s;c.height=img.height*s;c.getContext("2d").drawImage(img,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",.6));URL.revokeObjectURL(u)};img.onerror=()=>say("That file is not a readable image.");img.src=u}
 $("#file").onchange=e=>{const f=e.target.files[0];if(f)shrink(f,d=>{receipt=d;$("#prev").src=d;$("#prev").style.display="block"})};
@@ -365,8 +379,8 @@ $("#f").onsubmit=async e=>{e.preventDefault();const name=$("#name").value.trim()
  try{if(eP){if(!await patch("pledges",eP,f))return}else await add("pledges",{...f,ts:Date.now()})}catch(x){return er("Could not save. Please try again.")}
  const was=eP;resetP();celebrate(was?"Updated!":"Salamat po!",was?"Pledge changes saved.":"Pledge recorded.")};
 // Expenses
-function resetX(){$("#xf").reset();$("#xd").value=today();eX=null;$("#xt").textContent="🧾 New Expense";$("#xsub").textContent="✔ Save Expense";$("#xcx").hidden=true;$("#xe").textContent=""}
-function editX(id){const p=D.expenses.find(x=>x.id===id);if(!p)return;resetX();eX=id;$("#xi").value=p.item;$("#xa").value=p.amount;$("#xd").value=rd(p);$("#xt").textContent="✏️ Edit Expense";$("#xsub").textContent="✔ Save Changes";$("#xcx").hidden=false;$("#app").scrollTo({top:0})}
+function resetX(){$("#xf").reset();$("#xd").value=today();eX=null;$("#xt").textContent="🧾 New Expense";$("#xsub").textContent="Save Expense";$("#xcx").hidden=true;$("#xe").textContent=""}
+function editX(id){const p=D.expenses.find(x=>x.id===id);if(!p)return;resetX();eX=id;$("#xi").value=p.item;$("#xa").value=p.amount;$("#xd").value=rd(p);$("#xt").textContent="✏️ Edit Expense";$("#xsub").textContent="Save Changes";$("#xcx").hidden=false;$("#app").scrollTo({top:0})}
 $("#xcx").onclick=resetX;
 $("#xf").onsubmit=async e=>{e.preventDefault();const item=$("#xi").value.trim(),amount=Number($("#xa").value),er=m=>{$("#xe").textContent=m};
  if(!item)return er("Please type what the money was spent on.");if(!(amount>0))return er("Please enter the amount spent.");
@@ -425,8 +439,8 @@ function renderLib(){const all=members(),q=nk(lq),M=all.filter(m=>!q||nk(m.name)
  $("#le").hidden=!!M.length}
 function useM(m){resetP();location.hash="pledges";$("#name").value=m.name;if(m.amount)$("#amt").value=m.amount;setR("method",m.method);$("#addr").value=m.address||"";setR("phase",m.phase||"");
  if(m.address||m.phase){$("#opt").hidden=false;$("#more").textContent="− Hide optional details"}qm();say(m.name+" is ready. Check the amount, then save.")}
-function resetL(){$("#lf").reset();eLk=null;$("#lt").textContent="📚 Add to Library";$("#lsub").textContent="✔ Save to Library";$("#lcx").hidden=true;$("#le2").textContent=""}
-function editL(m){resetL();eLk=m;$("#ln").value=m.name;$("#la").value=m.address||"";setR("lph",m.phase||"");$("#lm").value=m.amount||"";setR("lmt",m.method);$("#lt").textContent="✏️ Edit "+m.name;$("#lsub").textContent="✔ Save Changes";$("#lcx").hidden=false;$("#app").scrollTo({top:0})}
+function resetL(){$("#lf").reset();eLk=null;$("#lt").textContent="📚 Add to Library";$("#lsub").textContent="Save to Library";$("#lcx").hidden=true;$("#le2").textContent=""}
+function editL(m){resetL();eLk=m;$("#ln").value=m.name;$("#la").value=m.address||"";setR("lph",m.phase||"");$("#lm").value=m.amount||"";setR("lmt",m.method);$("#lt").textContent="✏️ Edit "+m.name;$("#lsub").textContent="Save Changes";$("#lcx").hidden=false;$("#app").scrollTo({top:0})}
 document.addEventListener("click",e=>{const b=e.target.closest("button[data-lk]");if(!b)return;const k=b.dataset.lk,a=b.dataset.la,m=members().find(x=>x.key===k);if(!m)return;
  if(a==="use")return useM(m);if(a==="edit")return editL(m);
  if(arm!==k){arm=k;b.textContent="Tap again to confirm";setTimeout(()=>{if(arm===k){arm=null;b.textContent="Remove"}},3500);return}
@@ -438,6 +452,40 @@ $("#lf").onsubmit=async e=>{e.preventDefault();const name=$("#ln").value.trim(),
  try{if(eLk&&eLk.lib){if(!await patch("library",eLk.lib.id,f))return}else await add("library",{...f,ts:Date.now()})}catch(x){return er("Could not save. Please try again.")}
  const was=!!eLk;resetL();celebrate(was?"Updated!":"Saved!",was?"Library details updated.":"Added to the library.")};
 $("#lcx").onclick=resetL;$("#ls").addEventListener("input",e=>{lq=e.target.value;renderLib()});
+
+// ===== Step-by-step guide =====
+const TS=[
+{i:"👋",t:"Welcome!",b:["This app records <b>pledges</b>, <b>expenses</b> and <b>daily collections</b> for San Antonio South HOA.","Use the <b>5 buttons at the bottom</b> to move between sections.","This short guide takes about one minute."]},
+{i:"✍️",t:"Record a pledge",h:"pledges",g:"Take me to Pledges",b:["Type the person’s <b>full name</b>. It is the only detail you must type besides the amount.","Tap a <b>quick amount</b> (₱40, ₱100…) or type your own. The minimum is ₱40.","Choose <b>Cash, Bank or GCash</b>, check the date received, then tap <b>Save Pledge</b>."]},
+{i:"➕",t:"Optional details",h:"pledges",g:"Take me to Pledges",b:["Tap <b>＋ Add address, phase &amp; receipt</b> to open the extra fields.","Add the <b>complete address</b>, pick <b>Phase 1 or 2</b>, and attach a <b>photo of the receipt</b>.","Skip it when you don’t need it."]},
+{i:"📚",t:"The Library",h:"library",g:"Take me to the Library",b:["Save your regular pledgers once: <b>name, complete address, phase, usual amount and payment method</b>.","Tap <b>＋ Pledge</b> beside a name and the pledge form fills in for you.","Anyone you record a pledge for appears in the Library automatically. Use <b>Edit</b> to complete their details."]},
+{i:"🧾",t:"Record expenses",h:"expenses",g:"Take me to Expenses",b:["Type <b>what the money was for</b>, or tap Fuel, Driver’s pay, Repairs or Supplies.","Enter the <b>amount</b> and the <b>date</b>, then tap <b>Save Expense</b>."]},
+{i:"📅",t:"Daily record",h:"daily",g:"Take me to Daily",b:["Every day shows the <b>pledges received</b>, the <b>money spent</b> and the <b>net</b>.","Tap a day to see each pledge and that day’s <b>totals</b>."]},
+{i:"📋",t:"Summary and Excel",h:"summary",g:"Take me to Summary",b:["The <b>balance</b> is all pledges received minus all expenses.","<b>Save to Excel</b> makes a report and a backup. <b>Load from Excel</b> brings saved records back."]},
+{i:"✨",t:"Handy tips",b:["Tap <b>Edit</b> to fix an entry. <b>Remove</b> asks you to tap twice, so nothing is deleted by accident.","<b>🔠 Text size</b> makes everything bigger. <b>🌙 Dark mode</b> is easier on the eyes at night.","On a phone, <b>swipe left or right</b> to change sections.","Open this guide again anytime with <b>❓ How to use</b>."]}];
+let ti=0;
+function tshow(i){ti=i;const s=TS[i];$("#tu").hidden=false;$("#tui").textContent=s.i;$("#tun").textContent=`Step ${i+1} of ${TS.length}`;$("#tut").textContent=s.t;$("#tux").innerHTML=s.b.map(x=>`<li>${x}</li>`).join("");$("#tugo").hidden=!s.h;if(s.h)$("#tugo").textContent=s.g+" →";
+ $("#tubk").style.visibility=i?"visible":"hidden";$("#tunx").textContent=i===TS.length-1?"Start using the app":"Next →";$("#tud").innerHTML=TS.map((_,j)=>`<i class="${j===i?"on":""}"></i>`).join("");const c=$("#tus");c.classList.remove("sc");void c.offsetWidth;c.classList.add("sc")}
+function tend(){$("#tu").hidden=true;try{localStorage.setItem("hb-tut","1")}catch(e){}}
+$("#help").onclick=()=>tshow(0);$("#tunx").onclick=()=>ti>=TS.length-1?tend():tshow(ti+1);$("#tubk").onclick=()=>tshow(ti-1);$("#tuskip").onclick=tend;$("#tugo").onclick=()=>{const t=TS[ti].h;tend();location.hash=t};
+addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#tu").hidden)tend()});
+{let s=null;try{s=localStorage.getItem("hb-tut")}catch(e){}if(!s)setTimeout(()=>tshow(0),3200)}
+
+// ===== Name search dropdown =====
+const nw=document.createElement("div");nw.className="ddw";$("#name").parentNode.insertBefore(nw,$("#name"));nw.appendChild($("#name"));
+const dd=document.createElement("div");dd.className="dd";dd.id="nd";dd.hidden=true;dd.setAttribute("role","listbox");nw.appendChild(dd);$("#name").removeAttribute("list");
+let ddi=-1;function ddHide(){dd.hidden=true;ddi=-1}
+function ddShow(){if(eP)return ddHide();const q=nk($("#name").value),M=members().filter(m=>!q||nk(m.name).includes(q)||nk(m.address).includes(q)).sort((a,b)=>(nk(b.name).startsWith(q)-nk(a.name).startsWith(q))||a.name.localeCompare(b.name)).slice(0,8);
+ if(!M.length||(M.length===1&&nk(M[0].name)===q))return ddHide();
+ dd.innerHTML=M.map((m,i)=>`<button type="button" role="option" data-i="${i}"><span class="av" style="--h:${hue(m.name)}">${esc(m.name.trim().charAt(0).toUpperCase())}</span><span><b>${esc(m.name)}</b><br><small>${[m.address?esc(m.address):"",m.phase?"Phase "+m.phase:"",m.amount?"Usual "+peso(m.amount):""].filter(Boolean).join(" · ")||"No details yet"}</small></span></button>`).join("");dd._m=M;const was=dd.hidden;dd.hidden=false;ddi=-1;if(was){const a=$("#app"),r=$("#name").getBoundingClientRect(),ar=a.getBoundingClientRect();a.scrollBy({top:r.top-ar.top-72,behavior:"smooth"})}}
+function pickM(m){$("#name").value=m.name;$("#amt").value=m.amount||$("#amt").value;setR("method",m.method||"Cash");$("#addr").value=m.address||"";setR("phase",m.phase||"");
+ if(m.address||m.phase){$("#opt").hidden=false;$("#more").textContent="− Hide optional details"}qm();ddHide();say(m.name+"’s details filled in.");if(!$("#amt").value)$("#amt").focus()}
+$("#name").addEventListener("input",ddShow);$("#name").addEventListener("focus",ddShow);$("#name").addEventListener("blur",()=>setTimeout(ddHide,300));
+dd.addEventListener("mousedown",e=>e.preventDefault());dd.addEventListener("click",e=>{const b=e.target.closest("button[data-i]");if(b)pickM(dd._m[+b.dataset.i])});
+$("#name").addEventListener("keydown",e=>{if(dd.hidden)return;const bs=[...dd.querySelectorAll("button")];
+ if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();ddi=(ddi+(e.key==="ArrowDown"?1:-1)+bs.length)%bs.length;bs.forEach((b,i)=>b.classList.toggle("on",i===ddi));bs[ddi].scrollIntoView({block:"nearest"})}
+ else if(e.key==="Enter"&&ddi>=0){e.preventDefault();pickM(dd._m[ddi])}else if(e.key==="Escape")ddHide()});
+$("#f").addEventListener("reset",ddHide);
 $("#rd").value=today();$("#xd").value=today();
 render();init();
 </script>
